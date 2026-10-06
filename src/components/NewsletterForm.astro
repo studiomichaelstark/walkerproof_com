@@ -1,0 +1,17 @@
+---
+interface Props { id?: string; button?: string }
+const { id = 'newsletter', button = 'Subscribe' } = Astro.props;
+---
+{/* TODO: point `action` at the Brevo double opt-in endpoint (see README). */}
+<form method="post" action="/api/newsletter" class="mt-4 max-w-md">
+  <label for={`${id}-email`} class="block text-sm font-medium">Email address</label>
+  <div class="mt-1 flex flex-col sm:flex-row gap-2">
+    <input id={`${id}-email`} name="email" type="email" required autocomplete="email" inputmode="email"
+      class="flex-1 rounded border border-ink/40 bg-white px-3 py-2" />
+    <button type="submit" class="rounded bg-accent text-white px-4 py-2 font-medium hover:bg-ink">{button}</button>
+  </div>
+  <p class="mt-2 text-sm text-muted">
+    We send a confirmation email first (double opt-in). Unsubscribe any time.
+    See the <a href="/legal/privacy/" class="underline">privacy policy</a>.
+  </p>
+</form>

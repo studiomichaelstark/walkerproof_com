@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { getCollection } from 'astro:content';
+import { getGuides } from '../../lib/guides';
+
+export async function getStaticPaths() {
+  const topics = await getCollection('topics');
+  const guides = await getGuides();
+  return topics.map((topic) => ({
+    params: { topic: topic.id },
+    props: { topic, guides: guides.filter((g) => g.data.topic.id === topic.id) },
+  }));
+}
+const { topic, guides } = Astro.props;
+---
+<Base title={topic.data.title} description={topic.data.description}>
+  <p class="text-sm"><a href="/guides/" class="underline">All guides</a></p>
+  <h1 class="mt-2 font-serif text-4xl font-semibold">{topic.data.title}</h1>
+  <p class="mt-2 text-lg text-muted">{topic.data.description}</p>
+  <div class="mt-6">
+    {guides.length ? guides.map((g) => <GuideCard guide={g} />) : <p class="text-muted">No guides in this topic yet.</p>}
+  </div>
+</Base>

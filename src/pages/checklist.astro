@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
+---
+<Base title="Free gear care checklist" description="A one-page checklist for caring for your outdoor gear. Free by email.">
+  <h1 class="font-serif text-4xl font-semibold">The gear care checklist</h1>
+  <p class="mt-4 text-lg text-muted">One page. Everything to check before and after a trip, so your gear keeps working.</p>
+  <ul class="mt-6 list-disc pl-6 space-y-1">
+    <li>Clean and dry gear after every trip</li>
+    <li>Re-proof rain gear when water stops beading</li>
+    <li>Check boots, zips and seams</li>
+    <li>Store everything dry and uncompressed</li>
+  </ul>
+  <p class="mt-6">Enter your email and we send the checklist after you confirm.</p>
+  <NewsletterForm id="checklist" button="Send me the checklist" />
+</Base>
