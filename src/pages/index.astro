@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import GuideCard from '../components/GuideCard.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
+import { getGuides } from '../lib/guides';
+import { getCollection } from 'astro:content';
+import { SITE } from '../lib/site';
+
+const guides = (await getGuides()).slice(0, 5);
+const topics = new Map((await getCollection('topics')).map((t) => [t.id, t.data.title]));
+---
+<Base title={SITE.name} description="Plain-English guides on gear care, footwear, rain gear, cold weather and hiking. No tracking, no cookies.">
+  <section>
+    <h1 class="font-serif text-4xl sm:text-5xl font-semibold leading-tight">Gear that lasts. Trips that go right.</h1>
+    <p class="mt-4 text-lg text-muted">Short, practical guides on caring for your outdoor gear and choosing what actually works. No tracking, no cookies.</p>
+    <p class="mt-6"><a href="/checklist/" class="inline-block rounded bg-accent text-white px-5 py-3 font-medium no-underline hover:bg-ink">Get the free checklist</a></p>
+  </section>
+
+  <section class="mt-14" aria-labelledby="featured">
+    <h2 id="featured" class="text-sm uppercase tracking-wider text-muted font-semibold">Featured guides</h2>
+    {guides.length
+      ? guides.map((g) => <GuideCard guide={g} topicTitle={topics.get(g.data.topic.id)} />)
+      : <p class="mt-4 text-muted">First guides are on the way.</p>}
+    <p class="mt-4"><a href="/guides/" class="underline">All guides</a></p>
+  </section>
+
+  <section class="mt-14 rounded-lg bg-accent-soft p-6" aria-labelledby="nl">
+    <h2 id="nl" class="font-serif text-2xl font-semibold">New guides by email</h2>
+    <p class="mt-1">One short email when a new guide is published.</p>
+    <NewsletterForm id="home-nl" />
+  </section>
+</Base>

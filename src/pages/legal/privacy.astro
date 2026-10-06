@@ -1,0 +1,35 @@
+---
+// DRAFT: this privacy policy is a structured draft and has NOT been legally reviewed.
+// Have it checked before launch and before enabling analytics or the newsletter.
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../lib/site';
+---
+<Base title="Privacy policy" description="How walkerproof.com handles personal data.">
+  <h1 class="font-serif text-4xl font-semibold">Privacy policy</h1>
+  <p class="mt-3 rounded bg-accent-soft p-3 text-sm"><strong>Draft.</strong> This text is not final.</p>
+  <div class="prose prose-lg mt-6 max-w-none">
+    <h2>1. Controller</h2>
+    <p>Michael Konjevic, Hoffeldstraße 156, 70597 Stuttgart, Germany. Email: <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+
+    <h2>2. Hosting (Cloudflare)</h2>
+    <p>This site is hosted by Cloudflare, Inc. Cloudflare processes technical data (such as your IP address) to deliver the site and protect it from abuse. Legal basis: Art. 6(1)(f) GDPR (legitimate interest in a secure, fast website). A data processing agreement is in place. Data may be transferred to the USA under the EU-US Data Privacy Framework and standard contractual clauses.</p>
+
+    <h2>3. Server logs</h2>
+    <p>Our host may process IP address, date and time, requested URL, user agent and referrer. We use this only for security and stability. We do not combine it with other data.</p>
+
+    <h2>4. Cookies and local storage</h2>
+    <p>This site sets no cookies and uses no local storage. Fonts are hosted on this site. No third-party content is loaded.</p>
+
+    <h2>5. Analytics (Cloudflare Web Analytics)</h2>
+    <p>If enabled, we use Cloudflare Web Analytics. It does not use cookies or local storage and does not track individuals across sites. It measures page views and performance. Legal basis: Art. 6(1)(f) GDPR. <em>(Confirm status before launch.)</em></p>
+
+    <h2>6. Newsletter (Brevo)</h2>
+    <p>If you subscribe, we process your email address to send you the newsletter. We use double opt-in: we send a confirmation email, and you are subscribed only after you click the link. Legal basis: Art. 6(1)(a) GDPR (consent). You can unsubscribe at any time via the link in every email. Emails are sent through Brevo (Sendinblue GmbH / Brevo, France) as our processor. <em>(Not active yet.)</em></p>
+
+    <h2>7. Contact by email</h2>
+    <p>If you email us, we process your message and address to reply. Legal basis: Art. 6(1)(f) GDPR, or Art. 6(1)(b) if it concerns a contract.</p>
+
+    <h2>8. Your rights</h2>
+    <p>You have the right to access, rectification, erasure, restriction, data portability and objection (Art. 15 to 21 GDPR), and to withdraw consent at any time. You can complain to a supervisory authority, for example the Landesbeauftragte für den Datenschutz und die Informationsfreiheit Baden-Württemberg.</p>
+  </div>
+</Base>

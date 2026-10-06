@@ -1,0 +1,22 @@
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/source-serif-4';
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Source Serif 4 Variable', ui-serif, Georgia, serif;
+  --color-ink: oklch(22% 0.02 150);
+  --color-muted: oklch(45% 0.02 150);
+  --color-paper: oklch(98.5% 0.005 100);
+  --color-line: oklch(90% 0.01 100);
+  --color-accent: oklch(42% 0.09 155);
+  --color-accent-soft: oklch(94% 0.03 155);
+}
+
+@layer base {
+  html { font-family: var(--font-sans); color: var(--color-ink); background: var(--color-paper); }
+  :focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; border-radius: 2px; }
+  a { text-underline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+}

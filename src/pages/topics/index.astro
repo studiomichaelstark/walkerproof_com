@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const topics = await getCollection('topics');
+---
+<Base title="Topics" description="Browse Walkerproof guides by topic.">
+  <h1 class="font-serif text-4xl font-semibold">Topics</h1>
+  <ul class="mt-6 divide-y divide-line border-y border-line">
+    {topics.map((t) => (
+      <li class="py-4"><a href={`/topics/${t.id}/`} class="font-serif text-xl font-semibold hover:underline">{t.data.title}</a><p class="text-muted">{t.data.description}</p></li>
+    ))}
+  </ul>
+</Base>
