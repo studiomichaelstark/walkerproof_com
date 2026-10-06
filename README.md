@@ -34,7 +34,9 @@ Locale `en` only, no URL prefix. A new locale gets a prefix (`/de/`): add it to 
 
 ## Deployment
 
-Cloudflare Pages with git integration: build command `pnpm build`, output directory `dist`. Set the Node version to 22 or newer. No adapter needed.
+Cloudflare Workers with static assets, connected to this GitHub repo (Workers Builds). Config: `wrangler.jsonc` (serves `dist/`, uses `404.html` for unknown paths). Node version: `.node-version`.
+
+Cloudflare build settings: build command `pnpm run build`, deploy command `npx wrangler deploy`, production branch `main`. Pull request branches get preview builds. No adapter needed.
 
 ## Privacy
 
