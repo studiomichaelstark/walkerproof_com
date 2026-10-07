@@ -114,7 +114,7 @@
 
   /* Orange glow behind the hero visual. */
   .orb {
-    position: absolute; left: 50%; bottom: -55%; width: 135%; aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%;
+    position: absolute; left: 50%; bottom: -95%; width: 125%; aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%;
     background: radial-gradient(circle at 50% 50%, #ffb000 0%, #ff7a00 30%, #c2300a 50%, rgba(60, 10, 0, 0.6) 62%, transparent 72%);
   }
 

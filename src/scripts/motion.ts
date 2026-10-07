@@ -100,4 +100,19 @@ if (!reduced) {
       el.style.setProperty('--my', `${e.clientY - r.top}px`);
     });
   });
+
+  // Hero shoes: the two shoes take turns lifting, like a step cycle.
+  const stride = document.querySelector<HTMLElement>('[data-stride]');
+  if (stride) {
+    const step = (el: Element | null, delay: number) => {
+      if (!el) return;
+      animate(
+        el,
+        { transform: ['translateY(0%) rotate(0deg)', 'translateY(-9%) rotate(-5deg)', 'translateY(0%) rotate(0deg)'] },
+        { duration: 2.4, delay, repeat: Infinity, ease: 'easeInOut' },
+      );
+    };
+    step(stride.querySelector('[data-shoe="left"]'), 0);
+    step(stride.querySelector('[data-shoe="right"]'), 1.2);
+  }
 }

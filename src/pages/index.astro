@@ -6,7 +6,12 @@ import NewsletterForm from '../components/NewsletterForm.astro';
 import { getGuides, guideUrl, formatDate } from '../lib/guides';
 import { HOME_FAQ } from '../lib/faq';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 
+// Hero shoes: drop shoe-left.png and shoe-right.png (transparent) into src/assets/hero/ to switch the hero from the demo board to the walking shoes.
+const heroShoes = import.meta.glob<ImageMetadata>('../assets/hero/shoe-{left,right}.{png,webp}', { eager: true, import: 'default' });
+const shoeLeft = Object.entries(heroShoes).find(([k]) => k.includes('shoe-left'))?.[1];
+const shoeRight = Object.entries(heroShoes).find(([k]) => k.includes('shoe-right'))?.[1];
 const allGuides = await getGuides();
 const guides = allGuides.slice(0, 3);
 const topics = await getCollection('topics');
@@ -51,6 +56,12 @@ const why = [
       </div>
       <div class="relative" data-reveal data-delay="0.15">
         <div class="orb" aria-hidden="true"></div>
+        {shoeLeft && shoeRight ? (
+          <div class="relative mx-auto aspect-[5/4] w-full max-w-2xl" data-stride role="img" aria-label="Two waterproof trail shoes taking a step">
+            <Image src={shoeLeft} alt="" data-shoe="left" class="absolute left-0 top-[4%] h-auto w-[62%] drop-shadow-[0_30px_40px_rgba(0,0,0,0.55)]" widths={[480, 720, 960]} sizes="(min-width: 1024px) 420px, 60vw" loading="eager" />
+            <Image src={shoeRight} alt="" data-shoe="right" class="absolute bottom-[2%] right-0 h-auto w-[66%] drop-shadow-[0_30px_40px_rgba(0,0,0,0.55)]" widths={[480, 720, 960]} sizes="(min-width: 1024px) 460px, 62vw" loading="eager" />
+          </div>
+        ) : (
         <div class="glass-dark relative mx-auto max-w-2xl overflow-hidden !rounded-2xl shadow-2xl" role="img" aria-label="Illustration of a gear check board with three columns: To check, Re-treat and Dry">
           <div class="flex items-center gap-2 border-b border-line px-4 py-3 text-sm text-muted">
             <span class="h-2.5 w-2.5 rounded-full bg-white/25"></span><span class="h-2.5 w-2.5 rounded-full bg-white/25"></span><span class="h-2.5 w-2.5 rounded-full bg-white/25"></span>
@@ -73,6 +84,7 @@ const why = [
           </div>
           <div class="h-14" aria-hidden="true"></div>
         </div>
+        )}
       </div>
     </div>
   </section>
