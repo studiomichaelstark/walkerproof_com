@@ -5,3 +5,6 @@ export const SITE = {
   email: 'job@michaelkonjevic.de',
   defaultLocale: 'en',
 } as const;
+
+/** Set to true once the Brevo double opt-in endpoint exists (see README). */
+export const NEWSLETTER_OPEN = false;

@@ -1,22 +1,160 @@
 @import '@fontsource-variable/inter';
-@import '@fontsource-variable/source-serif-4';
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
-@theme {
+/* Palette follows the DesignLab reference (designlab.framer.website):
+   black ground, white type, lime accent, orange glow. Dark is the default; the light theme is opt-in via the toggle. */
+:root {
+  --lime: #ddff00;
+  --orange: #ff9a1f;
+  --orange-hot: #ff4d00;
+
+  --bg: #000000;
+  --surface: #0f0f0f;
+  --glass-a: rgba(255, 255, 255, 0.1);
+  --glass-b: rgba(255, 255, 255, 0.03);
+  --ink: #ffffff;
+  --soft: rgba(255, 255, 255, 0.8);
+  --muted: rgba(255, 255, 255, 0.62);
+  --line: rgba(255, 255, 255, 0.14);
+  --accent: var(--lime);
+  --on-accent: #000000;
+  --link: var(--lime);
+  --nav-bg: rgba(15, 15, 15, 0.8);
+  --btn-c: var(--ink);
+  --btn-i: #000000;
+  color-scheme: dark;
+}
+:root[data-theme='light'] {
+  --bg: #f4f4ef;
+  --surface: #ffffff;
+  --glass-a: rgba(255, 255, 255, 0.95);
+  --glass-b: rgba(255, 255, 255, 0.7);
+  --ink: #0a0a0a;
+  --soft: rgba(10, 10, 10, 0.82);
+  --muted: rgba(10, 10, 10, 0.62);
+  --line: rgba(10, 10, 10, 0.14);
+  --link: #0a0a0a;
+  --nav-bg: rgba(255, 255, 255, 0.85);
+  --btn-i: #ffffff;
+  color-scheme: light;
+}
+
+@theme inline {
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Source Serif 4 Variable', ui-serif, Georgia, serif;
-  --color-ink: oklch(22% 0.02 150);
-  --color-muted: oklch(45% 0.02 150);
-  --color-paper: oklch(98.5% 0.005 100);
-  --color-line: oklch(90% 0.01 100);
-  --color-accent: oklch(42% 0.09 155);
-  --color-accent-soft: oklch(94% 0.03 155);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-link: var(--link);
+  --color-accent: var(--accent);
 }
 
 @layer base {
-  html { font-family: var(--font-sans); color: var(--color-ink); background: var(--color-paper); }
-  :focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; border-radius: 2px; }
-  a { text-underline-offset: 3px; }
-  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+  html { font-family: var(--font-sans); background: var(--bg); color: var(--ink); }
+  body { font-size: 1.0625rem; line-height: 1.6; }
+  a { text-underline-offset: 0.2em; }
+  :focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; border-radius: 4px; }
+  ::selection { background: var(--lime); color: #000; }
+  :root { scrollbar-color: rgba(255, 255, 255, 0.3) var(--bg); }
+  input::placeholder { color: currentColor; opacity: 0.55; }
+  input:disabled, button:disabled { cursor: not-allowed; opacity: 0.7; }
+  [id] { scroll-margin-top: 6rem; }
 }
+
+@layer components {
+  .wrap { width: 100%; max-width: 100rem; margin-inline: auto; padding-inline: 1rem; }
+  @media (min-width: 48rem) { .wrap { padding-inline: 2rem; } }
+  .section { padding-block: clamp(4rem, 2rem + 7vw, 8.5rem); }
+
+  /* Type: light, large, sentence case, tight. */
+  .display { font-weight: 300; letter-spacing: -0.035em; line-height: 1.02; text-wrap: balance; font-size: clamp(2.75rem, 1rem + 5.4vw, 5.5rem); }
+  .h2 { font-weight: 300; letter-spacing: -0.03em; line-height: 1.05; text-wrap: balance; font-size: clamp(2.125rem, 1rem + 3.4vw, 3.75rem); }
+  .h3 { font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); text-wrap: balance; }
+  .lead { font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem); line-height: 1.55; color: var(--soft); max-width: 40rem; }
+  .text-accent { color: var(--accent); }
+  :root[data-theme='light'] .text-accent { color: var(--ink); text-decoration: underline; text-decoration-thickness: 0.08em; text-decoration-color: var(--lime); text-underline-offset: 0.12em; }
+
+  /* Buttons: pills. Lime is the primary action. */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 3rem;
+    padding: 0.65rem 1.5rem; border: 1px solid var(--line); border-radius: 999px;
+    color: var(--btn-c); background: transparent; font: inherit; font-size: 0.9375rem; font-weight: 500;
+    text-decoration: none; cursor: pointer;
+  }
+  .btn:hover { border-color: var(--btn-c); }
+  .btn-solid { background: var(--lime); border-color: var(--lime); color: #000; }
+  .btn-solid:hover { background: #f0ff70; border-color: #f0ff70; }
+  .btn-white { background: #fff; border-color: #fff; color: #000; }
+  .btn-white:hover { background: #e9e9e9; border-color: #e9e9e9; }
+  .btn-sm { min-height: 2.5rem; padding: 0.4rem 1.1rem; font-size: 0.875rem; }
+  .btn svg { width: 1.1em; height: 1.1em; }
+
+  /* Glass cards. */
+  .glass {
+    background: linear-gradient(145deg, var(--glass-a), var(--glass-b));
+    border: 1px solid var(--line); border-radius: 1.75rem;
+  }
+  :root[data-theme='light'] .glass { box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 18px 40px -28px rgba(0,0,0,0.25); }
+  .glass[data-spot] { position: relative; overflow: hidden; }
+  .glass[data-spot]::before { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(18rem circle at var(--mx, 50%) var(--my, 50%), rgba(221, 255, 0, 0.12), transparent 60%); }
+  .glass[data-spot]:hover::before { opacity: 1; }
+  [data-steps-ready] .step .step-text { display: none; }
+  [data-steps-ready] .step[aria-current='step'] .step-text { display: block; }
+  [data-steps-ready] .step:not([aria-current='step']) .h3 { color: var(--muted); }
+  [data-steps-ready] .step[aria-current='step'] { border-color: rgba(255, 255, 255, 0.35); }
+  .glass-dark { background: var(--surface); border: 1px solid var(--line); border-radius: 1.75rem; }
+  .card-orange {
+    border-radius: 1.75rem; color: #fff;
+    background: radial-gradient(120% 90% at 50% 120%, var(--orange) 0%, var(--orange-hot) 38%, #3a1203 72%, #0b0402 100%);
+    --btn-c: #fff; --btn-i: #000;
+  }
+  :root[data-theme='light'] .card-orange { background: radial-gradient(120% 90% at 50% 120%, var(--orange) 0%, var(--orange-hot) 45%, #7a2a08 100%); }
+
+  /* Orange glow behind the hero visual. */
+  .orb {
+    position: absolute; left: 50%; bottom: -95%; width: 125%; aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, #ffb000 0%, #ff7a00 30%, #c2300a 50%, rgba(60, 10, 0, 0.6) 62%, transparent 72%);
+  }
+
+  /* Image placeholders: dark glass panels with a warm glow until photos arrive. */
+  .ph {
+    position: relative; overflow: hidden; display: block; border-radius: 1.75rem; border: 1px solid var(--line);
+    background:
+      radial-gradient(60% 70% at 85% 110%, rgba(255, 140, 20, 0.55), rgba(255, 70, 0, 0.18) 55%, transparent 75%),
+      linear-gradient(145deg, #1a1a1a, #090909);
+  }
+  :root[data-theme='light'] .ph { background: radial-gradient(60% 70% at 85% 110%, rgba(255, 140, 20, 0.45), transparent 70%), linear-gradient(145deg, #ffffff, #e9e9e2); }
+  .ph[data-tone='lime'] { background: radial-gradient(60% 70% at 15% 110%, rgba(221, 255, 0, 0.35), transparent 70%), linear-gradient(145deg, #1a1a1a, #090909); }
+  .ph[data-tone='blue'] { background: radial-gradient(60% 70% at 50% 120%, rgba(60, 110, 255, 0.4), transparent 72%), linear-gradient(145deg, #15171d, #07080b); }
+
+  .pill-nav { background: var(--nav-bg); border: 1px solid var(--line); border-radius: 999px; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .nav-link { display: inline-flex; align-items: center; min-height: 2.5rem; padding: 0 1rem; border-radius: 999px; font-size: 0.9375rem; text-decoration: none; color: var(--soft); }
+  .nav-link:hover { color: var(--ink); background: var(--glass-a); }
+  .nav-link[aria-current='page'] { color: var(--ink); background: var(--glass-a); box-shadow: inset 0 0 0 1px var(--line); }
+  .nav-link[aria-current='page']::before { content: ''; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--lime); margin-right: 0.5rem; }
+  :root[data-theme='light'] .nav-link[aria-current='page']::before { box-shadow: 0 0 0 1px rgba(0,0,0,.4); }
+}
+
+/* Unlayered on purpose: must beat the typography plugin's own prose colours. */
+.prose { --tw-prose-body: var(--soft); --tw-prose-headings: var(--ink); --tw-prose-links: var(--link);
+  --tw-prose-bold: var(--ink); --tw-prose-counters: var(--muted); --tw-prose-bullets: var(--muted);
+  --tw-prose-hr: var(--line); --tw-prose-quotes: var(--ink); --tw-prose-quote-borders: var(--line);
+  --tw-prose-code: var(--ink); --tw-prose-th-borders: var(--line); --tw-prose-td-borders: var(--line); }
+.prose :where(h1, h2, h3, h4) { font-weight: 300; letter-spacing: -0.025em; text-wrap: balance; }
+.prose :where(a) { text-decoration-color: var(--lime); }
+
+/* Motion. Off when the visitor prefers reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html.motion-ok [data-reveal] { opacity: 0; animation: reveal-failsafe 0s 3s forwards; }
+  html.motion-ok.motion-ready [data-reveal] { animation: none; }
+  [data-lift] { will-change: transform; }
+  .marquee-track { animation: marquee 40s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+}
+@keyframes reveal-failsafe { to { opacity: 1; } }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee { overflow-x: auto; } }
+.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.marquee-track { display: flex; width: max-content; gap: 3.5rem; }

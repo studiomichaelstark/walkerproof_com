@@ -4,10 +4,12 @@ import { getCollection } from 'astro:content';
 const topics = await getCollection('topics');
 ---
 <Base title="Topics" description="Browse Walkerproof guides by topic.">
-  <h1 class="font-serif text-4xl font-semibold">Topics</h1>
-  <ul class="mt-6 divide-y divide-line border-y border-line">
+  <section id="topics-list" aria-labelledby="topics-title" class="wrap section">
+  <h1 id="topics-title" class="display">Topics</h1>
+  <ul class="mt-10 divide-y divide-line border-y border-line" role="list">
     {topics.map((t) => (
-      <li class="py-4"><a href={`/topics/${t.id}/`} class="font-serif text-xl font-semibold hover:underline">{t.data.title}</a><p class="text-muted">{t.data.description}</p></li>
+      <li class="py-6"><a href={`/topics/${t.id}/`} class="h2 no-underline hover:underline">{t.data.title}</a><p class="mt-2 text-muted">{t.data.description}</p></li>
     ))}
   </ul>
+</section>
 </Base>

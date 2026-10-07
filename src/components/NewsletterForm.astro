@@ -1,17 +1,22 @@
 ---
+import { NEWSLETTER_OPEN } from '../lib/site';
 interface Props { id?: string; button?: string }
 const { id = 'newsletter', button = 'Subscribe' } = Astro.props;
 ---
-{/* TODO: point `action` at the Brevo double opt-in endpoint (see README). */}
-<form method="post" action="/api/newsletter" class="mt-4 max-w-md">
-  <label for={`${id}-email`} class="block text-sm font-medium">Email address</label>
-  <div class="mt-1 flex flex-col sm:flex-row gap-2">
-    <input id={`${id}-email`} name="email" type="email" required autocomplete="email" inputmode="email"
-      class="flex-1 rounded border border-ink/40 bg-white px-3 py-2" />
-    <button type="submit" class="rounded bg-accent text-white px-4 py-2 font-medium hover:bg-ink">{button}</button>
-  </div>
-  <p class="mt-2 text-sm text-muted">
-    We send a confirmation email first (double opt-in). Unsubscribe any time.
+{/* TODO: point `action` at the Brevo double opt-in endpoint (see README), then set NEWSLETTER_OPEN = true. */}
+<form method="post" action="/api/newsletter" class="mt-6 w-full max-w-xl">
+  <fieldset disabled={!NEWSLETTER_OPEN} class="contents">
+    <label for={`${id}-email`} class="block text-[0.9375rem] font-medium">Email address</label>
+    <div class="mt-2 flex flex-col gap-3 sm:flex-row">
+      <input id={`${id}-email`} name="email" type="email" required autocomplete="email" inputmode="email" placeholder="you@example.com"
+        class="min-h-12 flex-1 rounded-full border border-current bg-transparent px-5 py-2 text-inherit" />
+      <button type="submit" class="btn btn-white">{NEWSLETTER_OPEN ? button : 'Opening soon'}</button>
+    </div>
+  </fieldset>
+  <p class="mt-3 text-[0.9375rem]">
+    {NEWSLETTER_OPEN
+      ? <>We send a confirmation email first (double opt-in). Unsubscribe any time. </>
+      : <>Signup is not open yet. </>}
     See the <a href="/legal/privacy/" class="underline">privacy policy</a>.
   </p>
 </form>

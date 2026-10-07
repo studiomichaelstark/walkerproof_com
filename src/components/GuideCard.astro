@@ -3,11 +3,8 @@ import { guideUrl, formatDate, type Guide } from '../lib/guides';
 interface Props { guide: Guide; topicTitle?: string }
 const { guide, topicTitle } = Astro.props;
 ---
-<article class="py-5 border-b border-line">
-  {topicTitle && <p class="text-xs uppercase tracking-wider text-accent font-medium">{topicTitle}</p>}
-  <h3 class="mt-1 text-xl font-serif font-semibold leading-snug">
-    <a href={guideUrl(guide)} class="hover:underline">{guide.data.title}</a>
-  </h3>
-  <p class="mt-1 text-muted">{guide.data.description}</p>
-  <p class="mt-2 text-sm text-muted"><time datetime={guide.data.publishedAt.toISOString()}>{formatDate(guide.data.publishedAt)}</time></p>
+<article class="glass my-4 p-6" data-reveal>
+  <h3 class="h3"><a href={guideUrl(guide)} class="no-underline hover:text-accent">{guide.data.title}</a></h3>
+  <p class="mt-2 max-w-2xl text-[var(--soft)]">{guide.data.description}</p>
+  <p class="mt-3 text-sm text-muted">{topicTitle && <>{topicTitle} · </>}<time datetime={guide.data.publishedAt.toISOString()}>{formatDate(guide.data.publishedAt)}</time></p>
 </article>

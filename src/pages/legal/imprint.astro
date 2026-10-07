@@ -3,8 +3,9 @@ import Base from '../../layouts/Base.astro';
 import { SITE } from '../../lib/site';
 ---
 <Base title="Imprint" description="Legal notice (Impressum) for walkerproof.com.">
-  <h1 class="font-serif text-4xl font-semibold">Imprint</h1>
-  <div class="prose prose-lg mt-6 max-w-none">
+  <section id="imprint" aria-labelledby="imprint-title" class="wrap section">
+  <h1 id="imprint-title" class="h2">Imprint</h1>
+  <div class="prose prose-lg mt-8">
     <h2>Information according to § 5 DDG</h2>
     <p>Michael Konjevic<br />Hoffeldstraße 156<br />70597 Stuttgart<br />Germany</p>
     <h2>Contact</h2>
@@ -12,4 +13,5 @@ import { SITE } from '../../lib/site';
     <h2>Responsible for content according to § 18 Abs. 2 MStV</h2>
     <p>Michael Konjevic, address as above.</p>
   </div>
+</section>
 </Base>

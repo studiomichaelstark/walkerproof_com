@@ -5,3 +5,8 @@ dist/
 .env.*
 !.env.example
 .DS_Store
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/build/
+.impeccable/live/
+.claude/scheduled_tasks.lock

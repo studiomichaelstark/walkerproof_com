@@ -5,9 +5,10 @@ import Base from '../../layouts/Base.astro';
 import { SITE } from '../../lib/site';
 ---
 <Base title="Privacy policy" description="How walkerproof.com handles personal data.">
-  <h1 class="font-serif text-4xl font-semibold">Privacy policy</h1>
-  <p class="mt-3 rounded bg-accent-soft p-3 text-sm"><strong>Draft.</strong> This text is not final.</p>
-  <div class="prose prose-lg mt-6 max-w-none">
+  <section id="privacy" aria-labelledby="privacy-title" class="wrap section">
+  <h1 id="privacy-title" class="h2">Privacy policy</h1>
+  <p class="mt-3 border-2 border-current p-3 text-sm"><strong>Draft.</strong> This text is not final.</p>
+  <div class="prose prose-lg mt-8">
     <h2>1. Controller</h2>
     <p>Michael Konjevic, Hoffeldstraße 156, 70597 Stuttgart, Germany. Email: <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
 
@@ -32,4 +33,5 @@ import { SITE } from '../../lib/site';
     <h2>8. Your rights</h2>
     <p>You have the right to access, rectification, erasure, restriction, data portability and objection (Art. 15 to 21 GDPR), and to withdraw consent at any time. You can complain to a supervisory authority, for example the Landesbeauftragte für den Datenschutz und die Informationsfreiheit Baden-Württemberg.</p>
   </div>
+</section>
 </Base>

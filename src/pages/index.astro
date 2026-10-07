@@ -1,32 +1,286 @@
 ---
 import Base from '../layouts/Base.astro';
-import GuideCard from '../components/GuideCard.astro';
+import Arrow from '../components/Arrow.astro';
+import Faq from '../components/Faq.astro';
 import NewsletterForm from '../components/NewsletterForm.astro';
-import { getGuides } from '../lib/guides';
+import { getGuides, guideUrl, formatDate } from '../lib/guides';
+import { HOME_FAQ } from '../lib/faq';
 import { getCollection } from 'astro:content';
-import { SITE } from '../lib/site';
+import { Image } from 'astro:assets';
 
-const guides = (await getGuides()).slice(0, 5);
-const topics = new Map((await getCollection('topics')).map((t) => [t.id, t.data.title]));
+// Hero shoe: src/assets/hero/shoe.png (transparent). If the file is missing, the demo board is shown instead.
+const heroShoes = import.meta.glob<ImageMetadata>('../assets/hero/shoe.{png,webp}', { eager: true, import: 'default' });
+const shoe = Object.values(heroShoes)[0];
+// Depth layers along the z-axis: [x, y, z, opacity, brightness]
+const layers: Array<[string, string, string, number, number]> = [
+  ['36%', '-30%', '-560px', 0.3, 0.55],
+  ['18%', '-15%', '-280px', 0.6, 0.75],
+  ['0%', '0%', '0px', 1, 1],
+];
+const allGuides = await getGuides();
+const guides = allGuides.slice(0, 3);
+const topics = await getCollection('topics');
+const titles = new Map(topics.map((t) => [t.id, t.data.title]));
+const topicById = new Map(topics.map((t) => [t.id, t]));
+const counts = new Map(topics.map((t) => [t.id, allGuides.filter((g) => g.data.topic.id === t.id).length]));
+const countLabel = (id: string) => `${counts.get(id)} ${counts.get(id) === 1 ? 'guide' : 'guides'}`;
+
+// Masonry columns for #topics: [topic id, aspect ratio, tone].
+const columns: Array<Array<[string, string, string?]>> = [
+  [['footwear', '4/5'], ['cold-weather', '1/1', 'blue']],
+  [['rain-gear', '1/1', 'lime'], ['hiking', '4/5']],
+  [['gear-care', '4/5', 'blue']],
+];
+const ticker = ['Waterproof shoes', 'Rain jackets', 'Gear care', 'Hiking in the rain', 'Re-proofing', 'Gore-Tex and membranes', 'Headlamps', 'IPX ratings', 'Power banks', 'Cold weather layers'];
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: HOME_FAQ.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
+};
+const steps = [
+  { n: '01', title: 'Test it', text: 'Is your gear still waterproof? A few simple checks on water beading, seams, soles and zips tell you in minutes.', tone: undefined },
+  { n: '02', title: 'Fix it', text: 'Clean it, re-treat it, dry it the right way. Most leaks are a care problem, not a gear problem.', tone: 'lime' },
+  { n: '03', title: 'Choose it', text: 'When it is time to replace something, pick the type that fits the weather you actually walk in.', tone: 'blue' },
+];
+const why = [
+  { title: 'Plain English', text: 'Labels decoded. No jargon, no hype.', icon: 'M4 6h16M4 12h10M4 18h16' },
+  { title: 'Care first', text: 'Make the gear you own last, then buy smarter.', icon: 'M12 3c3 4 6 6.5 6 10a6 6 0 0 1-12 0c0-3.5 3-6 6-10z' },
+  { title: 'Private by design', text: 'No cookies, no trackers, no third-party requests.', icon: 'M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z' },
+];
 ---
-<Base title={SITE.name} description="Plain-English guides on gear care, footwear, rain gear, cold weather and hiking. No tracking, no cookies.">
-  <section>
-    <h1 class="font-serif text-4xl sm:text-5xl font-semibold leading-tight">Gear that lasts. Trips that go right.</h1>
-    <p class="mt-4 text-lg text-muted">Short, practical guides on caring for your outdoor gear and choosing what actually works. No tracking, no cookies.</p>
-    <p class="mt-6"><a href="/checklist/" class="inline-block rounded bg-accent text-white px-5 py-3 font-medium no-underline hover:bg-ink">Get the free checklist</a></p>
+<Base title="Waterproof gear guides: shoes, jackets, care" description="Plain-English guides on waterproof shoes, rain gear, gear care and hiking in any weather. How to test it, fix it and choose it. No tracking, no cookies." jsonLd={[faqLd]}>
+  <section id="hero" aria-labelledby="hero-title" class="relative overflow-hidden">
+    <div class="wrap section grid gap-14 pt-16 md:pt-24 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+      <div class="relative z-10">
+        <h1 id="hero-title" class="display" data-reveal>Waterproof, until it isn't.</h1>
+        <p class="lead mt-6" data-reveal data-delay="0.1">Shoes, jackets and gear lose their protection quietly, usually halfway up a wet trail. These plain-English guides show you how to test waterproof gear, fix it, and choose what keeps you dry in any weather.</p>
+        <p class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3" data-reveal data-delay="0.2">
+          <a href="/guides/" class="btn btn-solid">Read the guides <Arrow /></a>
+          <span class="text-muted">No cookies. No trackers.</span>
+        </p>
+      </div>
+      <div class="relative" data-reveal data-delay="0.15">
+        <div class="orb" aria-hidden="true"></div>
+        {shoe ? (
+          <div class="relative mx-auto aspect-[5/4] w-full max-w-2xl" data-stride role="img" aria-label="A waterproof trail shoe">
+            <div class="absolute inset-0" style="perspective: 1100px; perspective-origin: 30% 70%;">
+              <div class="absolute inset-0" style="transform-style: preserve-3d;" data-tilt>
+                {layers.map(([x, y, z, opacity, bright], i) => (
+                  <div class="absolute bottom-[4%] left-[0%] w-[76%]" style={`transform: translate3d(${x}, ${y}, ${z}); opacity: ${opacity};`} aria-hidden={i < layers.length - 1 ? 'true' : undefined}>
+                    <div data-float={i}>
+                      <Image src={shoe} alt="" class="h-auto w-full" style={`filter: brightness(${bright}) drop-shadow(0 30px 40px rgba(0,0,0,0.55));`} widths={[480, 720, 960]} sizes="(min-width: 1024px) 460px, 70vw" loading="eager" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : (
+        <div class="glass-dark relative mx-auto max-w-2xl overflow-hidden !rounded-2xl shadow-2xl" role="img" aria-label="Illustration of a gear check board with three columns: To check, Re-treat and Dry">
+          <div class="flex items-center gap-2 border-b border-line px-4 py-3 text-sm text-muted">
+            <span class="h-2.5 w-2.5 rounded-full bg-white/25"></span><span class="h-2.5 w-2.5 rounded-full bg-white/25"></span><span class="h-2.5 w-2.5 rounded-full bg-white/25"></span>
+            <span class="ml-3">Walkerproof gear check</span>
+          </div>
+          <div class="grid grid-cols-3 gap-3 p-4" data-board>
+            {[['To check', '#3b82f6'], ['Re-treat', '#ffae00'], ['Dry', '#22c55e']].map(([label, color]) => (
+              <div>
+                <p class="flex items-center gap-2 rounded-md bg-white/5 px-3 py-2 text-sm"><span class="h-2 w-2 rounded-full" style={`background: ${color}`}></span>{label}</p>
+              </div>
+            ))}
+            <ul class="col-span-3 -mt-1 grid grid-cols-3 gap-3 text-sm" role="presentation">
+              {['Hiking boots', 'Rain jacket', 'Headlamp', 'Power bank', 'Tent'].map((item, i) => (
+                <li class:list={['rounded-lg border border-line bg-white/5 px-3 py-2.5', i === 1 && 'relative']} data-chip={i === 1 ? '' : undefined}>
+                  {item}
+                  {i === 1 && <span class="absolute -bottom-3 left-8 rounded-full bg-[#27ae60] px-2.5 py-0.5 text-xs text-white">You</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="h-14" aria-hidden="true"></div>
+        </div>
+        )}
+      </div>
+    </div>
   </section>
 
-  <section class="mt-14" aria-labelledby="featured">
-    <h2 id="featured" class="text-sm uppercase tracking-wider text-muted font-semibold">Featured guides</h2>
-    {guides.length
-      ? guides.map((g) => <GuideCard guide={g} topicTitle={topics.get(g.data.topic.id)} />)
-      : <p class="mt-4 text-muted">First guides are on the way.</p>}
-    <p class="mt-4"><a href="/guides/" class="underline">All guides</a></p>
+  <section id="covered" aria-label="What we cover" class="py-10">
+    <div class="wrap flex items-center gap-8">
+      <p class="hidden shrink-0 text-muted md:block">We cover</p>
+      <div class="marquee flex-1">
+        <ul class="marquee-track" role="list">
+          {[...ticker, ...ticker].map((t, i) => <li class="whitespace-nowrap text-xl text-[var(--soft)]" aria-hidden={i >= ticker.length ? 'true' : undefined}>{t}</li>)}
+        </ul>
+      </div>
+    </div>
   </section>
 
-  <section class="mt-14 rounded-lg bg-accent-soft p-6" aria-labelledby="nl">
-    <h2 id="nl" class="font-serif text-2xl font-semibold">New guides by email</h2>
-    <p class="mt-1">One short email when a new guide is published.</p>
-    <NewsletterForm id="home-nl" />
+  <section id="how" aria-labelledby="how-title" class="wrap section">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 id="how-title" class="h2" data-reveal>How to keep dry</h2>
+      <p class="lead mx-auto mt-5" data-reveal data-delay="0.1">Waterproof gear fails quietly and fixes cheaply. Three steps cover almost every wet-feet story.</p>
+      <p class="mt-8" data-reveal data-delay="0.15"><a href="/guides/" class="btn btn-solid">Read the guides <Arrow /></a></p>
+    </div>
+    <div class="relative mt-16 lg:h-[190vh]" data-steps>
+      <div class="grid gap-10 lg:sticky lg:top-28 lg:h-[34rem] lg:grid-cols-2 lg:items-center">
+        <ol class="flex flex-col gap-3" role="list">
+          {steps.map((s, i) => (
+            <li class="glass step px-6 py-5" data-step={i} aria-current={i === 0 ? 'step' : undefined}>
+              <p class="text-sm text-muted">{s.n}</p>
+              <h3 class="h3 mt-1">{s.title}</h3>
+              <p class="step-text mt-2 max-w-md text-[var(--soft)]">{s.text}</p>
+              <span class="ph mt-5 aspect-[16/10] lg:hidden" aria-hidden="true" data-tone={s.tone}></span>
+            </li>
+          ))}
+        </ol>
+        <div class="relative hidden h-full lg:block" aria-hidden="true">
+          {steps.map((s, i) => (
+            <span class="ph absolute inset-0 flex items-end p-8" data-tone={s.tone} data-visual={i} style={i === 0 ? '' : 'opacity: 0'}>
+              <span class="text-[10rem] font-light leading-none tracking-tighter text-white/90">{s.n}</span>
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why" aria-labelledby="why-title" class="wrap section pt-0">
+    <h2 id="why-title" class="h2 text-center" data-reveal>Why Walkerproof</h2>
+    <ul class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" role="list">
+      {why.map((w, i) => (
+        <li class="glass flex min-h-72 flex-col p-6" data-reveal data-delay={i * 0.08} data-lift data-spot>
+          <span class="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--lime)] text-black">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true" focusable="false"><path d={w.icon} /></svg>
+          </span>
+          <p class="mt-auto text-sm text-muted">0{i + 1}</p>
+          <h3 class="h3 mt-1">{w.title}</h3>
+          <p class="mt-2 text-[var(--soft)]">{w.text}</p>
+        </li>
+      ))}
+      <li class="card-orange flex min-h-72 flex-col p-6" data-reveal data-delay="0.24" data-lift>
+        <h3 class="h3">Get started today</h3>
+        <p class="mt-2 text-white/85">One page to check before and after every trip.</p>
+        <a href="/checklist/" class="btn btn-white mt-auto w-full">Get the checklist <Arrow /></a>
+      </li>
+    </ul>
+  </section>
+
+  <section id="topics" aria-labelledby="topics-title" class="wrap section pt-0">
+    <div class="relative">
+      <h2 id="topics-title" class="h2 pointer-events-none sticky top-1/3 z-10 mx-auto w-fit max-w-[90%] rounded-3xl bg-[var(--nav-bg)] px-8 py-4 text-center backdrop-blur-md">Where does your gear leak?</h2>
+      <p class="sr-only">Topics: {topics.map((t) => t.data.title).join(', ')}.</p>
+      <ul class="-mt-16 grid items-start gap-4 md:grid-cols-3" role="list">
+        {columns.map((col, ci) => (
+          <li class:list={['flex flex-col gap-4', ci === 1 && 'md:mt-24', ci === 2 && 'md:mt-10']} data-parallax={[-30, 40, -10][ci]}>
+            <ul class="flex flex-col gap-4" role="list">
+              {col.map(([id, ratio, tone]) => (
+                <li data-reveal>
+                  <a href={`/topics/${id}/`} data-lift class="ph group block no-underline" data-tone={tone} style={`aspect-ratio: ${ratio};`}>
+                    <span class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-gradient-to-t from-black/80 to-transparent p-6 pt-20 text-white">
+                      <span>
+                        <span class="h3 block">{topicById.get(id)?.data.title}</span>
+                        <span class="mt-1 block max-w-xs text-sm text-white/75">{topicById.get(id)?.data.description}</span>
+                      </span>
+                      <span class="shrink-0 rounded-full bg-white/15 px-3 py-1 text-sm">{countLabel(id)}</span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+              {ci === 2 && (
+                <li data-reveal>
+                  <div class="card-orange flex aspect-square flex-col justify-end p-6">
+                    <h3 class="h3">Gear on the go</h3>
+                    <p class="mt-2 text-white/85">Headlamps, power banks and light stoves. Guides are coming.</p>
+                  </div>
+                </li>
+              )}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="labels" aria-labelledby="labels-title" class="wrap section pt-0">
+    <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+      <div>
+        <h2 id="labels-title" class="h2" data-reveal>"Waterproof" on the label. Wet socks in real life.</h2>
+        <p class="lead mt-6" data-reveal>Waterproof, water-resistant, water-repellent: brands use all three, and they do not mean the same thing. Waterproof gear adds a membrane and sealed seams so water cannot pass through, even in a long downpour.</p>
+        <p class="lead mt-4" data-reveal>Then real life happens. Dirt clogs the fabric, the outer layer soaks up water, seams wear out, and shoes fill from the top. That is why gear that kept you dry last year can leak this year. Most of the time the fix is cheap: clean it, re-treat it, or pick the type that matches the weather you actually walk in.</p>
+        <p class="mt-8 flex flex-wrap gap-3" data-reveal>
+          <a href="/topics/footwear/" class="btn">Waterproof shoes</a>
+          <a href="/topics/rain-gear/" class="btn">Rain jackets</a>
+          <a href="/topics/gear-care/" class="btn">Gear care</a>
+        </p>
+      </div>
+      <dl class="glass divide-y divide-line p-2" data-reveal data-delay="0.1">
+        {[
+          ['Water-repellent', 'A surface treatment makes water bead and roll off. It wears off with dirt and washing.'],
+          ['Water-resistant', 'Handles splashes and light rain for a while. Not built for hours of heavy rain.'],
+          ['Waterproof', 'A membrane plus sealed seams block water in sustained rain. Still needs care to stay that way.'],
+        ].map(([term, text]) => (
+          <div class="px-5 py-5">
+            <dt class="h3">{term}</dt>
+            <dd class="mt-1 text-[var(--soft)]">{text}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section id="guides" aria-labelledby="guides-title" class="wrap section pt-0">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <h2 id="guides-title" class="h2" data-reveal>Read this before the next rain</h2>
+      <a href="/guides/" class="btn">All guides <Arrow /></a>
+    </div>
+    {guides.length ? (
+      <ul class="mt-10 grid gap-4 md:grid-cols-3" role="list">
+        {guides.map((g) => (
+          <li data-reveal>
+            <a href={guideUrl(g)} data-lift class="glass block h-full no-underline">
+              <span class="ph m-3 mb-0 aspect-[4/3]" aria-hidden="true"></span>
+              <span class="block p-6">
+                <span class="h3 block">{g.data.title}</span>
+                <span class="mt-2 block text-sm text-muted">{titles.get(g.data.topic.id)} · <time datetime={g.data.publishedAt.toISOString()}>{formatDate(g.data.publishedAt)}</time></span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div class="glass mt-10 p-8" data-reveal><p class="lead">The first guides are being written. Subscribe below and we send you a note when they land.</p></div>
+    )}
+  </section>
+
+  <section id="offer" aria-labelledby="offer-title" class="wrap section pt-0">
+    <div class="grid gap-4 lg:grid-cols-[1.7fr_1fr]">
+      <div class="glass grid gap-8 p-8 md:grid-cols-2 md:p-10" data-reveal>
+        <div>
+          <span class="inline-block rounded-full bg-[var(--lime)] px-3 py-1 text-sm font-medium text-black">Free</span>
+          <h2 id="offer-title" class="h2 mt-5">The gear care checklist</h2>
+          <p class="mt-4 text-[var(--soft)]">One page to check before and after every trip, so your shoes, jacket and kit keep working.</p>
+          <p class="mt-8"><a href="/checklist/" class="btn btn-solid w-full sm:w-auto">Get the checklist <Arrow /></a></p>
+        </div>
+        <div>
+          <p class="h3">What's included</p>
+          <ul class="mt-4 space-y-3 text-[var(--soft)]" role="list">
+            {['Clean and dry gear after every trip', 'Re-proof rain gear when water stops beading', 'Check boots, zips and seams', 'Store everything dry and uncompressed'].map((t) => (
+              <li class="flex gap-3"><span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--orange)]" aria-hidden="true"></span>{t}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div id="newsletter" class="card-orange flex flex-col p-8 md:p-10" data-reveal data-delay="0.1">
+        <h2 class="h2">Get the next guide before the next storm</h2>
+        <p class="mt-4 text-white/85">One short email when a new guide is published.</p>
+        <NewsletterForm id="home-nl" />
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" aria-labelledby="faq-title" class="wrap section pt-0">
+    <div class="grid gap-10 lg:grid-cols-[1fr_2fr]">
+      <h2 id="faq-title" class="h2 lg:sticky lg:top-28 lg:self-start" data-reveal>Answers before you buy</h2>
+      <Faq items={HOME_FAQ} />
+    </div>
   </section>
 </Base>

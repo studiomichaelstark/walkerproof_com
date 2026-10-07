@@ -11,3 +11,11 @@
 
 - Use pnpm, not npm. Check with `pnpm check` and `pnpm build` before every PR.
 - Astro, TypeScript strict, Tailwind. Static output.
+
+## Design
+
+- Reference: designlab.framer.website. Black ground, white light-weight Inter, lime #DDFF00 for primary buttons, orange glow, glass cards, floating pill navigation. Do not bring back the retired cream/red palette.
+- Inter is the only font. Wordmark is plain text for now.
+- Motion: smooth scroll (`lenis`), scroll reveal, hover lift, sticky steps, marquee, parallax (`motion`), all in `src/scripts/motion.ts`, bundled locally and disabled under `prefers-reduced-motion`.
+- Colours come from tokens in `src/styles/global.css`; do not hardcode new palette values.
+- Every section needs its own `id`. Dark is the default; keep the light theme working and the theme toggle storage-free.
