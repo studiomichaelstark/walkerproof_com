@@ -1,8 +1,5 @@
-# Hero shoes
+# Hero shoe
 
-Put two transparent images here to switch the home hero from the demo board to the animated walking shoes:
+`shoe.png`: one transparent image of the shoe, tightly cropped. The home hero shows it three times along the z-axis (front plus two fading copies behind), floating slightly and tilting with the pointer. Remove the file and the hero falls back to the demo board.
 
-- `shoe-left.png` (or `.webp`)
-- `shoe-right.png` (or `.webp`)
-
-Square canvas (2048 x 2048), shoe tightly framed, real alpha channel, no shadow. The animation lives in `src/scripts/motion.ts` (`data-stride`). Prompts: `docs/hero-shoe-prompts.md`.
+Animation: `src/scripts/motion.ts` (`data-stride`, `data-float`, `data-tilt`). Layout: `src/pages/index.astro`.

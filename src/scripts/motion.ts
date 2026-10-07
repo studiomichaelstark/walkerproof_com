@@ -101,18 +101,23 @@ if (!reduced) {
     });
   });
 
-  // Hero shoes: the two shoes take turns lifting, like a step cycle.
+  // Hero shoe: the layers behind each other (z-axis) float slightly out of step, and the stack tilts with the pointer.
   const stride = document.querySelector<HTMLElement>('[data-stride]');
   if (stride) {
-    const step = (el: Element | null, delay: number) => {
-      if (!el) return;
-      animate(
-        el,
-        { transform: ['translateY(0%) rotate(0deg)', 'translateY(-9%) rotate(-5deg)', 'translateY(0%) rotate(0deg)'] },
-        { duration: 2.4, delay, repeat: Infinity, ease: 'easeInOut' },
-      );
-    };
-    step(stride.querySelector('[data-shoe="left"]'), 0);
-    step(stride.querySelector('[data-shoe="right"]'), 1.2);
+    stride.querySelectorAll<HTMLElement>('[data-float]').forEach((el) => {
+      const i = Number(el.dataset.float ?? 0);
+      animate(el, { transform: ['translateY(0px)', `translateY(${-10 - i * 3}px)`, 'translateY(0px)'] }, { duration: 3.4, delay: i * 0.35, repeat: Infinity, ease: 'easeInOut' });
+    });
+    const tilt = stride.querySelector<HTMLElement>('[data-tilt]');
+    const hero = document.getElementById('hero');
+    if (tilt && hero) {
+      hero.addEventListener('pointermove', (e) => {
+        const r = hero.getBoundingClientRect();
+        const nx = (e.clientX - r.left) / r.width - 0.5;
+        const ny = (e.clientY - r.top) / r.height - 0.5;
+        animate(tilt, { transform: `rotateY(${nx * 14}deg) rotateX(${-ny * 10}deg)` }, { duration: 0.8, ease });
+      });
+      hero.addEventListener('pointerleave', () => animate(tilt, { transform: 'rotateY(0deg) rotateX(0deg)' }, { duration: 1, ease }));
+    }
   }
 }
