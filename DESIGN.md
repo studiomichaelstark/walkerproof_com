@@ -62,7 +62,7 @@ spacing:
   gutter-sm: "20px"
   gutter-md: "40px"
   section: "clamp(3.5rem, 2rem + 6vw, 7rem)"
-  wrap-max: "72rem"
+  wrap-max: "88rem"
 components:
   button-solid:
     backgroundColor: "{colors.red}"
@@ -102,7 +102,7 @@ components:
 
 A gear-care publication set the way outdoor sportswear is branded: giant uppercase Inter on a cream page, centred, with one red accent and typographic lists where other sites would use colour blocks or card grids. The page is mostly cream and ink. Colour is rationed: red appears on the primary button, one highlighted word and hover, and the only coloured regions are one ink band and one sand band.
 
-The system is quiet by construction. There is one typeface, no animation, no shadows, no gradients and no stored state. Hierarchy comes from scale and weight (800 uppercase against 400 body) and from hairline rules, not from decoration. Photography is not yet supplied, so photo areas are tone-on-tone placeholders carrying the round "wobble" mark. Style reference is the HYLO running-shoe site, as a direction rather than a template.
+The system is quiet by construction. There is one typeface, restrained motion (scroll reveal, hover lift, press feedback and smooth scroll, all off under reduced motion), no shadows, no gradients and no stored state. Hierarchy comes from scale and weight (800 uppercase against 400 body) and from hairline rules, not from decoration. Photography is not yet supplied, so photo areas are tone-on-tone placeholders carrying the round "wobble" mark. Style reference is the HYLO running-shoe site, as a direction rather than a template.
 
 **Key Characteristics:**
 - Centred editorial composition; text sections centre, the privacy split is the one asymmetric moment.
@@ -110,7 +110,7 @@ The system is quiet by construction. There is one typeface, no animation, no sha
 - Red is accent only; sand appears in one band (and as accent text in dark theme).
 - Hairline rules and typographic lists instead of cards and colour blocks.
 - Outlined pill buttons, one solid red.
-- No motion, no cookies, no storage, no third-party requests.
+- Motion only as subtle micro-animation and smooth scroll, bundled locally and disabled under reduced motion. No cookies, no storage, no third-party requests.
 
 ## Colors
 
@@ -157,14 +157,14 @@ A cream-and-ink page with a single red voice, one sand band, and a neutral near-
 
 ## Layout
 
-Centred editorial column. Content sits in a 72rem wrap with 1.25rem gutters, widening to 2.5rem from 48rem. Sections breathe on a fluid vertical pad of clamp(3.5rem, 2rem + 6vw, 7rem); consecutive cream sections drop their top pad so rhythm stays even. Hero, topics, guides, checklist and newsletter are centred; the privacy section is a two-column split (placeholder left, text right) from 48rem, stacked below. The latest-guides row is a three-column grid from 48rem with 2rem gaps. Every section carries its own id and a labelled heading. Header is a centred wordmark above a centred, wrapping nav row; the footer is an ink band with a full-width wordmark.
+Left-aligned editorial layout. Content sits in an 88rem wrap with 1.25rem gutters, widening to 2.5rem from 48rem and 4rem from 80rem. Sections breathe on a fluid vertical pad of clamp(3.5rem, 2rem + 6vw, 7rem); consecutive cream sections drop their top pad. The topics are a six-column bento grid of rounded tiles (Footwear large, two stacked beside it, two wide below). Guides are a 3 to 4 column grid, and the privacy and checklist blocks are rounded cards (sand only on the checklist card). The home page also carries an explainer section and a native details/summary FAQ with FAQPage structured data. Every section carries its own id. Header is the wordmark left and the nav right, with an underlined accent state for the current section; the footer is a hairline-topped block with a small wordmark.
 
 ## Elevation & Depth
 
-Flat. There are no shadows, gradients or blurs. Depth is conveyed by tonal bands (cream, ink, sand), 1px hairline rules (`--line`), and tone-on-tone placeholders. Hover is a fill or colour change, never a lift. There is no animation anywhere.
+Flat. There are no shadows, gradients or blurs. Depth is conveyed by tonal bands (cream, ink, sand), 1px hairline rules (`--line`), and tone-on-tone placeholders. Hover is a fill or colour change; bento tiles also lift 6px. Motion is limited to a fade-up reveal on scroll, hover lift, button press and smooth scroll (`src/scripts/motion.ts`), all disabled under reduced motion.
 
 ### Named Rules
-**The Flat-Always Rule.** No box-shadows and no motion. A state change is an instant colour swap.
+**The Flat-Always Rule.** No box-shadows. Motion stays subtle (short fade-up, small lift) and never blocks content; a state change is otherwise a colour swap.
 
 ## Shapes
 
@@ -207,6 +207,6 @@ Centred row of uppercase 600 links at 0.875rem with wide tracking (0.025em) and 
 ### Don't:
 - **Don't** use brown (#8C5C32) or coral (#D97B66); they are in the owner's palette but out of the system.
 - **Don't** fill a section with red or add a third coloured band.
-- **Don't** add animation, transitions, shadows, gradients, cookies, localStorage or third-party requests.
+- **Don't** add decorative or looping animation, shadows, gradients, cookies, localStorage or third-party requests.
 - **Don't** add a second typeface.
 - **Don't** replace a placeholder with an illustrative stock image; wait for supplied photography.

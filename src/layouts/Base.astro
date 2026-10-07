@@ -40,6 +40,7 @@ const path = Astro.url.pathname;
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#f2e9d8" />
     <meta name="color-scheme" content="light dark" />
+    <script is:inline>if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion-ok');</script>
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:type" content={type} />
     <meta property="og:title" content={title} />
@@ -54,12 +55,12 @@ const path = Astro.url.pathname;
   <body class="min-h-screen flex flex-col antialiased">
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:bg-white focus:p-3 focus:text-black">Skip to content</a>
     <header id="site-header" class="border-b border-line">
-      <div class="wrap relative py-3 text-center">
-        <a href="/" aria-label="Walkerproof, home" class="inline-block py-1 text-ink"><Logo class="h-9 w-auto" /></a>
+      <div class="wrap flex flex-wrap items-center justify-between gap-x-8 gap-y-1 py-4">
+        <a href="/" aria-label="Walkerproof, home" class="inline-block py-1 text-ink"><Logo class="h-11 w-auto md:h-14" /></a>
         <nav aria-label="Main navigation">
-          <ul class="flex flex-wrap justify-center gap-x-7 text-sm font-semibold uppercase tracking-wide" role="list">
+          <ul class="flex flex-wrap gap-x-7 text-sm font-semibold uppercase tracking-wide" role="list">
             {nav.map((n) => (
-              <li><a href={n.href} class="inline-block py-2 no-underline hover:text-accent" aria-current={path.startsWith(n.href) ? 'page' : undefined}>{n.label}</a></li>
+              <li><a href={n.href} class="inline-block border-b-2 border-transparent py-2 no-underline hover:text-accent aria-[current=page]:border-current aria-[current=page]:text-accent" aria-current={path.startsWith(n.href) ? 'page' : undefined}>{n.label}</a></li>
             ))}
             <li hidden><button id="theme-toggle" type="button" aria-pressed="false" class="inline-block cursor-pointer py-2 font-semibold uppercase tracking-wide underline decoration-1 underline-offset-4 hover:text-accent"><span data-theme-label>Dark</span> mode</button></li>
           </ul>
@@ -69,20 +70,24 @@ const path = Astro.url.pathname;
     <main id="main" class="flex-1">
       <slot />
     </main>
-    <footer id="site-footer" class="field-ink">
-      <div class="wrap pt-14 pb-8">
-        <a href="/" aria-label="Walkerproof, home" class="block"><Logo class="w-full h-auto" /></a>
-        <div class="mt-10 flex flex-wrap justify-between gap-4 text-sm">
-          <p>&copy; {new Date().getFullYear()} {SITE.name}. No cookies. No trackers.</p>
+    <footer id="site-footer" class="border-t border-line">
+      <div class="wrap py-12">
+        <a href="/" aria-label="Walkerproof, home" class="inline-block text-ink"><Logo class="h-10 w-auto" /></a>
+        <p class="mt-4 max-w-md text-muted">Plain-English guides on gear that keeps you dry. No cookies. No trackers.</p>
+        <div class="mt-8 flex flex-wrap justify-between gap-4 text-sm">
+          <p>&copy; {new Date().getFullYear()} {SITE.name}</p>
           <nav aria-label="Footer navigation">
-            <ul class="flex gap-6 font-semibold uppercase tracking-wide">
-              <li><a href="/legal/imprint/" class="py-2 inline-block hover:underline">Imprint</a></li>
-              <li><a href="/legal/privacy/" class="py-2 inline-block hover:underline">Privacy</a></li>
+            <ul class="flex gap-6 font-semibold uppercase tracking-wide" role="list">
+              <li><a href="/legal/imprint/" class="inline-block py-2 hover:text-accent">Imprint</a></li>
+              <li><a href="/legal/privacy/" class="inline-block py-2 hover:text-accent">Privacy</a></li>
             </ul>
           </nav>
         </div>
       </div>
     </footer>
+    <script>
+      import '../scripts/motion';
+    </script>
     <script is:inline>
       // Theme toggle. Nothing is stored: no cookie, no localStorage. It follows the OS setting
       // until the visitor flips it, and the choice lasts for the current page view only.

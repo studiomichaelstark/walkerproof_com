@@ -1,36 +1,59 @@
 ---
 import Base from '../layouts/Base.astro';
 import Mark from '../components/Mark.astro';
+import Faq from '../components/Faq.astro';
 import NewsletterForm from '../components/NewsletterForm.astro';
 import { getGuides, guideUrl, formatDate } from '../lib/guides';
+import { HOME_FAQ } from '../lib/faq';
 import { getCollection } from 'astro:content';
 import { SITE } from '../lib/site';
 
 const allGuides = await getGuides();
-const guides = allGuides.slice(0, 3);
+const guides = allGuides.slice(0, 4);
 const topics = await getCollection('topics');
 const titles = new Map(topics.map((t) => [t.id, t.data.title]));
+const order = ['footwear', 'rain-gear', 'gear-care', 'hiking', 'cold-weather'];
+const bento: Record<string, string> = {
+  footwear: 'md:col-span-4 md:row-span-2',
+  'rain-gear': 'md:col-span-2',
+  'gear-care': 'md:col-span-2',
+  hiking: 'md:col-span-3',
+  'cold-weather': 'md:col-span-3',
+};
+const orderedTopics = [...topics].sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
 const counts = new Map(topics.map((t) => [t.id, allGuides.filter((g) => g.data.topic.id === t.id).length]));
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: HOME_FAQ.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
+};
 ---
-<Base title={SITE.name} description="Plain-English guides on gear care, footwear, rain gear, cold weather and hiking. No tracking, no cookies.">
-  <section id="hero" aria-labelledby="hero-title" class="wrap section text-center">
-    <h1 id="hero-title" class="display">Gear that <span class="text-accent">lasts.</span></h1>
-    <p class="lead mx-auto mt-6">Short, practical guides on caring for your outdoor gear and choosing what actually works. Nothing tracks you here.</p>
-    <p class="mt-8 flex flex-wrap justify-center gap-3">
+<Base title="Waterproof gear guides: shoes, jackets, care" description="Plain-English guides on waterproof shoes, rain gear, gear care and hiking in any weather. How to test it, fix it and choose it. No tracking, no cookies." jsonLd={[faqLd]}>
+  <section id="hero" aria-labelledby="hero-title" class="wrap section">
+    <h1 id="hero-title" class="display max-w-5xl" data-reveal>Waterproof, <span class="text-accent">until it isn't.</span></h1>
+    <p class="lead mt-6 max-w-2xl" data-reveal data-delay="0.1">Shoes, jackets and gear lose their protection quietly, usually halfway up a wet trail. These plain-English guides show you how to test waterproof gear, fix it, and choose what keeps you dry in any weather.</p>
+    <p class="mt-8 flex flex-wrap gap-3">
       <a href="/guides/" class="btn btn-solid">Read the guides</a>
       <a href="/checklist/" class="btn">Get the checklist</a>
     </p>
-    <span class="ph mt-14 aspect-[16/9] md:aspect-[21/9]" aria-hidden="true"><Mark /></span>
+    <span class="ph mt-14 aspect-[16/9] md:aspect-[21/9]" aria-hidden="true" data-reveal data-delay="0.2"><Mark /></span>
   </section>
 
   <section id="topics" aria-labelledby="topics-title" class="wrap section pt-0">
-    <h2 id="topics-title" class="h2 text-center">Find your topic</h2>
-    <ul class="mt-10 border-t border-line" role="list">
-      {topics.map((t) => (
-        <li class="border-b border-line">
-          <a href={`/topics/${t.id}/`} class="flex items-baseline justify-between gap-6 py-5 no-underline hover:text-accent">
-            <span class="h2">{t.data.title}</span>
-            <span class="shrink-0 text-sm font-semibold uppercase tracking-wide text-muted">{counts.get(t.id)} {counts.get(t.id) === 1 ? 'guide' : 'guides'}</span>
+    <h2 id="topics-title" class="h2 max-w-3xl" data-reveal>Where does your gear leak?</h2>
+    <p class="lead mt-4 max-w-2xl text-muted">Pick the part of your kit that worries you most. Each topic collects the guides on testing, fixing and choosing it.</p>
+    <ul class="mt-10 grid gap-4 md:grid-cols-6 md:auto-rows-[minmax(15rem,auto)]" role="list">
+      {orderedTopics.map((t, i) => (
+        <li class:list={['flex', bento[t.id]]} data-reveal data-delay={i * 0.08}>
+          <a href={`/topics/${t.id}/`} data-lift class="card group flex w-full flex-col gap-4 p-3 no-underline hover:text-accent">
+            <span class="ph min-h-44 flex-1" aria-hidden="true"><Mark /></span>
+            <span class="px-3 pb-3">
+              <span class="flex items-baseline justify-between gap-4">
+                <span class="h3 text-2xl">{t.data.title}</span>
+                <span class="shrink-0 text-sm font-semibold uppercase tracking-wide text-muted">{counts.get(t.id)} {counts.get(t.id) === 1 ? 'guide' : 'guides'}</span>
+              </span>
+              <span class="mt-1 block text-muted">{t.data.description}</span>
+            </span>
           </a>
         </li>
       ))}
@@ -38,9 +61,9 @@ const counts = new Map(topics.map((t) => [t.id, allGuides.filter((g) => g.data.t
   </section>
 
   <section id="guides" aria-labelledby="guides-title" class="wrap section pt-0">
-    <h2 id="guides-title" class="h2 text-center">Latest guides</h2>
+    <h2 id="guides-title" class="h2 max-w-3xl" data-reveal>Read this before the next rain</h2>
     {guides.length ? (
-      <ul class="mt-10 grid gap-8 md:grid-cols-3" role="list">
+      <ul class="mt-10 grid gap-8 md:grid-cols-3 lg:grid-cols-4" role="list">
         {guides.map((g) => (
           <li>
             <a href={guideUrl(g)} class="block no-underline hover:text-accent">
@@ -52,33 +75,56 @@ const counts = new Map(topics.map((t) => [t.id, allGuides.filter((g) => g.data.t
         ))}
       </ul>
     ) : (
-      <p class="lead mx-auto mt-6 text-center text-muted">The first guides are on the way. Subscribe below and we send you a note when they land.</p>
+      <p class="lead mt-4 max-w-2xl text-muted">The first guides are being written. Subscribe below and we send you a note when they land.</p>
     )}
-    <p class="mt-8 text-center"><a href="/guides/" class="btn btn-sm">All guides</a></p>
+    <p class="mt-8"><a href="/guides/" class="btn btn-sm">All guides</a></p>
   </section>
 
-  <section id="private" aria-labelledby="private-title" class="field-ink">
-    <div class="grid md:grid-cols-2">
-      <span class="ph min-h-72 md:min-h-[30rem]" aria-hidden="true"><Mark /></span>
-      <div class="px-5 py-14 md:px-12 md:py-20 self-center">
-        <h2 id="private-title" class="h2">No cookies. No trackers. No nonsense.</h2>
+  <section id="labels" aria-labelledby="labels-title" class="wrap section pt-0">
+    <div class="grid gap-10 md:grid-cols-2 md:items-center">
+      <div>
+        <h2 id="labels-title" class="h2" data-reveal>"Waterproof" on the label. Wet socks in real life.</h2>
+        <p class="mt-6 max-w-prose">Waterproof, water-resistant, water-repellent: brands use all three, and they do not mean the same thing. Water-resistant fabric sheds light rain for a while. Waterproof gear adds a membrane and sealed seams so water cannot pass through, even in a long downpour.</p>
+        <p class="mt-4 max-w-prose">Then real life happens. Dirt clogs the fabric, the outer layer soaks up water, seams wear out, and shoes fill from the top. That is why gear that kept you dry last year can leak this year. Most of the time the fix is cheap: clean it, re-treat it, or pick the type that matches the weather you actually walk in.</p>
+        <p class="mt-6 flex flex-wrap gap-x-6 gap-y-2 font-semibold">
+          <a href="/topics/footwear/" class="text-link">Waterproof shoes</a>
+          <a href="/topics/rain-gear/" class="text-link">Rain jackets</a>
+          <a href="/topics/gear-care/" class="text-link">Gear care</a>
+        </p>
+      </div>
+      <span class="ph aspect-[4/3]" aria-hidden="true"><Mark /></span>
+    </div>
+  </section>
+
+  <section id="faq" aria-labelledby="faq-title" class="wrap section pt-0">
+    <h2 id="faq-title" class="h2 max-w-3xl" data-reveal>Questions people ask before they buy waterproof gear</h2>
+    <div class="mt-10" data-reveal><Faq items={HOME_FAQ} /></div>
+  </section>
+
+  <section id="private" aria-labelledby="private-title" class="wrap section pt-0">
+    <div class="card grid gap-8 p-6 md:grid-cols-2 md:items-center md:p-12" data-reveal>
+      <div>
+        <h2 id="private-title" class="h2">We don't follow you around.</h2>
         <p class="lead mt-5">No cookies, no local storage, no third-party requests. Fonts are hosted here. When a guide has affiliate links, it says so at the top.</p>
-        <p class="mt-8"><a href="/legal/privacy/" class="btn">Privacy policy</a></p>
+        <p class="mt-8"><a href="/legal/privacy/" class="btn btn-sm">Read the privacy policy</a></p>
+      </div>
+      <span class="ph aspect-[4/3]" aria-hidden="true"><Mark /></span>
+    </div>
+  </section>
+
+  <section id="checklist" aria-labelledby="checklist-title" class="wrap section pt-0">
+    <div data-reveal class="card-sand grid gap-8 p-6 md:grid-cols-[1.2fr_1fr] md:items-center md:p-12">
+      <div>
+        <h2 id="checklist-title" class="h2">Check your gear before the rain does.</h2>
+        <p class="lead mt-5">One page: what to check before and after every trip, so your shoes, jacket and kit keep working.</p>
+        <p class="mt-8"><a href="/checklist/" class="btn btn-solid">Get the checklist</a></p>
       </div>
     </div>
   </section>
 
-  <section id="checklist" aria-labelledby="checklist-title" class="field-sand text-center">
-    <div class="wrap section">
-      <h2 id="checklist-title" class="h2">The gear care checklist</h2>
-      <p class="lead mx-auto mt-5">One page. What to check before and after every trip, so your gear keeps working.</p>
-      <p class="mt-8"><a href="/checklist/" class="btn btn-solid">Get the checklist</a></p>
-    </div>
-  </section>
-
-  <section id="newsletter" aria-labelledby="newsletter-title" class="wrap section text-center">
-    <h2 id="newsletter-title" class="display">Stay in the know.</h2>
-    <p class="lead mx-auto mt-5">One short email when a new guide is published.</p>
-    <div class="mx-auto max-w-xl text-left"><NewsletterForm id="home-nl" /></div>
+  <section id="newsletter" aria-labelledby="newsletter-title" class="wrap section pt-0">
+    <h2 id="newsletter-title" class="display max-w-4xl" data-reveal>Get the next guide before the next storm.</h2>
+    <p class="lead mt-5 max-w-2xl">One short email when a new guide is published.</p>
+    <NewsletterForm id="home-nl" />
   </section>
 </Base>

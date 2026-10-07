@@ -21,7 +21,7 @@ Static Astro site on Cloudflare, hosted from the owner's GitHub repo; content is
 ## Capabilities and Constraints
 - No cookies, no localStorage, no third-party requests, no embeds. Fonts self-hosted.
 - Only one font family: Inter.
-- No animations. Light and dark theme, switchable by the visitor without storing anything.
+- Subtle micro-animations only (scroll reveal, hover lift, button press) and smooth scrolling, all switched off for visitors who prefer reduced motion. Light and dark theme, switchable by the visitor without storing anything.
 - Each page section has its own id.
 - Copy is English, short and clear.
 - Affiliate links only with a visible disclosure.

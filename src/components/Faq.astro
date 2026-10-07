@@ -1,0 +1,17 @@
+---
+import type { FaqItem } from '../lib/faq';
+interface Props { items: FaqItem[] }
+const { items } = Astro.props;
+---
+<div class="divide-y divide-line border-y border-line">
+  {items.map((item) => (
+    <details class="group py-5">
+      <summary class="flex cursor-pointer list-none items-baseline justify-between gap-6 text-left h3 hover:text-accent [&::-webkit-details-marker]:hidden">
+        <span>{item.question}</span>
+        <span class="shrink-0 text-sm font-semibold uppercase tracking-wide text-muted group-open:hidden">Open</span>
+        <span class="hidden shrink-0 text-sm font-semibold uppercase tracking-wide text-muted group-open:inline">Close</span>
+      </summary>
+      <p class="mt-3 max-w-prose text-muted">{item.answer}</p>
+    </details>
+  ))}
+</div>

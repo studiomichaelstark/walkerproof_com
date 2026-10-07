@@ -33,7 +33,8 @@ Topics: `src/content/topics/*.yaml`. Authors: `src/content/authors/*.yaml`.
 - One font: Inter (variable, self-hosted via Fontsource).
 - Palette tokens live in `src/styles/global.css`: cream is the body background, red is accent only, sand is used sparingly; brown and coral are deliberately unused. Light and dark themes follow the OS setting.
 - The header toggle switches theme for the current page view only. Nothing is stored (no cookie, no localStorage), so it resets on navigation. Persisting it would need storage, which the privacy rules forbid.
-- No animations. Every page section has its own `id`.
+- Motion: smooth scroll (Lenis) and micro-animations (Motion, vanilla build) in `src/scripts/motion.ts`. Mark elements with `data-reveal` (fade-up on scroll) or `data-lift` (hover lift). Both libraries are bundled with the site (no CDN, no cookies) and everything is off when the visitor prefers reduced motion.
+- Every page section has its own `id`.
 - Photo areas are placeholders (wobble mark on a colour field). Replace them with real photos when available.
 - Logo components: `src/components/Logo.astro` (wordmark), `Mark.astro` (round badge). Favicons and `site.webmanifest` are in `public/`.
 
