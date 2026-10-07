@@ -15,10 +15,14 @@ export async function getStaticPaths() {
 const { topic, guides } = Astro.props;
 ---
 <Base title={topic.data.title} description={topic.data.description}>
-  <p class="text-sm"><a href="/guides/" class="underline">All guides</a></p>
-  <h1 class="mt-2 font-serif text-4xl font-semibold">{topic.data.title}</h1>
-  <p class="mt-2 text-lg text-muted">{topic.data.description}</p>
-  <div class="mt-6">
-    {guides.length ? guides.map((g) => <GuideCard guide={g} />) : <p class="text-muted">No guides in this topic yet.</p>}
-  </div>
+  <section id="topic-header" aria-labelledby="topic-title" class="field-coral">
+    <div class="wrap section">
+      <p class="text-sm font-semibold uppercase tracking-wide"><a href="/topics/" class="underline">Topics</a></p>
+      <h1 id="topic-title" class="display mt-3">{topic.data.title}</h1>
+      <p class="lead mt-5">{topic.data.description}</p>
+    </div>
+  </section>
+  <section id="topic-guides" aria-label="Guides in this topic" class="wrap section">
+    {guides.length ? guides.map((g) => <GuideCard guide={g} />) : <p class="lead text-muted">No guides in this topic yet.</p>}
+  </section>
 </Base>

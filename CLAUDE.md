@@ -11,3 +11,9 @@
 
 - Use pnpm, not npm. Check with `pnpm check` and `pnpm build` before every PR.
 - Astro, TypeScript strict, Tailwind. Static output.
+
+## Design
+
+- Inter is the only font. No animations. Brown (#8C5C32) is not used in the UI.
+- Colours come from tokens in `src/styles/global.css`; do not hardcode new palette values.
+- Every section needs its own `id`. Keep light and dark themes working, and the theme toggle storage-free.

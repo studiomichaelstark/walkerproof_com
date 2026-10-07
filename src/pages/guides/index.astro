@@ -9,14 +9,16 @@ const topics = await getCollection('topics');
 const titles = new Map(topics.map((t) => [t.id, t.data.title]));
 ---
 <Base title="All guides" description="Every Walkerproof guide on gear care, footwear, rain gear, cold weather and hiking.">
-  <h1 class="font-serif text-4xl font-semibold">Guides</h1>
-  <nav aria-label="Filter by topic" class="mt-5">
-    <ul class="flex flex-wrap gap-2 text-sm">
-      <li><a href="/guides/" aria-current="page" class="inline-block rounded-full bg-ink text-white px-3 py-1 no-underline">All</a></li>
-      {topics.map((t) => <li><a href={`/topics/${t.id}/`} class="inline-block rounded-full border border-line px-3 py-1 no-underline hover:bg-accent-soft">{t.data.title}</a></li>)}
+  <section id="guides-list" aria-labelledby="guides-title" class="wrap section">
+  <h1 id="guides-title" class="display">Guides</h1>
+  <nav aria-label="Filter by topic" class="mt-8">
+    <ul class="flex flex-wrap gap-2" role="list">
+      <li><a href="/guides/" aria-current="page" class="btn btn-solid btn-sm">All</a></li>
+      {topics.map((t) => <li><a href={`/topics/${t.id}/`} class="btn btn-sm">{t.data.title}</a></li>)}
     </ul>
   </nav>
-  <div class="mt-6">
+  <div class="mt-10">
     {guides.length ? guides.map((g) => <GuideCard guide={g} topicTitle={titles.get(g.data.topic.id)} />) : <p class="text-muted">No guides yet.</p>}
   </div>
+</section>
 </Base>

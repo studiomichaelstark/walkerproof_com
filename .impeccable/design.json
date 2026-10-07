@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-07T00:00:00Z",
+  "title": "Design System: Walkerproof",
+  "extensions": {
+    "colorMeta": {
+      "red": { "role": "primary", "displayName": "Walker Red", "canonical": "#a60321", "tonalRamp": ["#2a0009", "#4a0211", "#6e0218", "#a60321", "#c4283f", "#d9626f", "#eba0a8", "#f8dadd"] },
+      "coral": { "role": "secondary", "displayName": "Trail Coral", "canonical": "#d97b66", "tonalRamp": ["#3a1810", "#64301f", "#8f4a38", "#b8624d", "#d97b66", "#e69c8c", "#f0bfb3", "#f9e3dd"] },
+      "sand": { "role": "secondary", "displayName": "Dry Sand", "canonical": "#d9a577", "tonalRamp": ["#33200f", "#5c3d1e", "#865d34", "#b07f4e", "#d9a577", "#e5bd9a", "#efd5bc", "#f8eadd"] },
+      "cream": { "role": "neutral", "displayName": "Paper Cream", "canonical": "#f2e9d8", "tonalRamp": ["#2f2a20", "#554e3f", "#7d745f", "#a79d85", "#c9bfa8", "#e0d6bf", "#f2e9d8", "#faf5ea"] },
+      "night": { "role": "neutral", "displayName": "Night Bark", "canonical": "#1c1211", "tonalRamp": ["#1c1211", "#271917", "#2a1816", "#3d2926", "#563e3a", "#745b56", "#9a837d", "#c4b3ae"] },
+      "ink-dark": { "role": "neutral", "displayName": "Bark Ink", "canonical": "#2a1816", "tonalRamp": ["#1c1211", "#2a1816", "#3d2926", "#563e3a", "#745b56", "#9a837d", "#c4b3ae", "#e8dedb"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero and newsletter headings, uppercase 800." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings, uppercase 800." },
+      "title": { "displayName": "Title", "purpose": "Tile names and guide titles, 700." },
+      "lead": { "displayName": "Lead", "purpose": "Sentence under a heading, max 38rem." },
+      "body": { "displayName": "Body", "purpose": "Running text." },
+      "label": { "displayName": "Label", "purpose": "Buttons, nav, form labels, uppercase 600." }
+    },
+    "shadows": [],
+    "motion": [],
+    "breakpoints": [
+      { "name": "md", "value": "48rem" },
+      { "name": "content-max", "value": "72rem" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Solid Pill Button",
+      "kind": "button",
+      "refersTo": "button-solid",
+      "description": "Primary action; fill and text come from the surrounding field.",
+      "html": "<div class=\"ds-field\"><a class=\"ds-btn ds-btn-solid\" href=\"#\">Read the guides</a> <a class=\"ds-btn\" href=\"#\">Get the checklist</a></div>",
+      "css": ".ds-field{background:#a60321;color:#f2e9d8;padding:24px;--c:#f2e9d8;--i:#a60321;font-family:'Inter Variable',system-ui,sans-serif}.ds-btn{display:inline-flex;align-items:center;justify-content:center;min-height:3rem;padding:.7rem 1.5rem;border:2px solid var(--c);border-radius:999px;color:var(--c);background:transparent;font-size:.9375rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;text-decoration:none}.ds-btn-solid{background:var(--c);color:var(--i)}.ds-btn-solid:hover{background:transparent;color:var(--c)}.ds-btn:not(.ds-btn-solid):hover{background:var(--c);color:var(--i)}.ds-btn:focus-visible{outline:3px solid #f2e9d8;outline-offset:3px}"
+    },
+    {
+      "name": "Email Field",
+      "kind": "input",
+      "refersTo": "email-input",
+      "description": "Pill input with a 2px current-colour border and an uppercase label.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-label\" for=\"e\">Email address</label><input id=\"e\" class=\"ds-input\" type=\"email\" placeholder=\"you@example.com\"></div>",
+      "css": ".ds-field{background:#a60321;color:#f2e9d8;padding:24px;font-family:'Inter Variable',system-ui,sans-serif}.ds-label{display:block;font-size:.9375rem;font-weight:600;letter-spacing:.025em;text-transform:uppercase}.ds-input{margin-top:8px;width:100%;min-height:3rem;border:2px solid currentColor;border-radius:999px;background:transparent;color:inherit;padding:.5rem 1.25rem;font:inherit}.ds-input::placeholder{color:currentColor;opacity:.7}.ds-input:focus-visible{outline:3px solid #f2e9d8;outline-offset:3px}"
+    },
+    {
+      "name": "Topic Tile",
+      "kind": "card",
+      "refersTo": "photo-placeholder",
+      "description": "4:5 square-cornered colour field with uppercase title and cropped wobble mark.",
+      "html": "<a class=\"ds-tile\" href=\"#\"><span class=\"ds-tile-title\">Footwear</span><svg viewBox=\"0 0 100 100\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"46\" fill=\"#d97b66\"/></svg></a>",
+      "css": ".ds-tile{position:relative;overflow:hidden;display:block;width:240px;aspect-ratio:4/5;background:#d97b66;color:#2a1816;text-decoration:none;font-family:'Inter Variable',system-ui,sans-serif}.ds-tile-title{position:absolute;inset:0 0 auto 0;padding:20px;font-weight:700;font-size:1.375rem;letter-spacing:-.02em;line-height:1.15;text-transform:uppercase}.ds-tile svg{position:absolute;width:70%;right:-12%;bottom:-14%;filter:brightness(.9)}.ds-tile:focus-visible{outline:3px solid #2a1816;outline-offset:3px}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "button-small",
+      "description": "Uppercase small nav with a hairline-ruled header and a small outline toggle.",
+      "html": "<header class=\"ds-nav\"><strong>WALKERPROOF</strong><ul><li><a href=\"#\">Guides</a></li><li><a href=\"#\">Topics</a></li><li><a href=\"#\">Checklist</a></li></ul><button class=\"ds-toggle\">Dark</button></header>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:20px;padding:8px 20px;border-bottom:1px solid #cbbfab;background:#f2e9d8;color:#2a1816;font-family:'Inter Variable',system-ui,sans-serif}.ds-nav ul{display:flex;gap:20px;list-style:none;margin:0 auto 0 0;padding:0;font-size:.875rem;font-weight:600;letter-spacing:.025em;text-transform:uppercase}.ds-nav a{color:inherit;text-decoration:none;padding:12px 0;display:inline-block}.ds-nav a:hover{text-decoration:underline}.ds-toggle{min-height:2.5rem;padding:.4rem 1rem;border:2px solid #2a1816;border-radius:999px;background:transparent;color:#2a1816;font:600 .8125rem 'Inter Variable',sans-serif;letter-spacing:.03em;text-transform:uppercase}.ds-toggle:hover{background:#2a1816;color:#f2e9d8}.ds-nav a:focus-visible,.ds-toggle:focus-visible{outline:3px solid #a60321;outline-offset:3px}"
+    },
+    {
+      "name": "Guide Card",
+      "kind": "card",
+      "refersTo": "photo-placeholder",
+      "description": "Archive item: hairline top, title, muted description and meta.",
+      "html": "<article class=\"ds-guide\"><h3><a href=\"#\">How to reproof a rain jacket</a></h3><p>Wash, dry, and refresh the water repellent.</p><small>Rain gear · 1 Oct 2026</small></article>",
+      "css": ".ds-guide{border-top:1px solid #cbbfab;padding:24px 0;background:#f2e9d8;color:#2a1816;font-family:'Inter Variable',system-ui,sans-serif}.ds-guide h3{margin:0;font-size:1.5rem;font-weight:700;letter-spacing:-.02em;line-height:1.15}.ds-guide a{color:inherit;text-decoration:none}.ds-guide a:hover{text-decoration:underline}.ds-guide a:focus-visible{outline:3px solid #a60321;outline-offset:3px}.ds-guide p{margin:8px 0 0;color:#6a5a53}.ds-guide small{display:block;margin-top:8px;color:#6a5a53}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Trailhead Banner",
+    "overview": "A gear-care publication that dresses like outdoor sportswear: giant uppercase Inter at weight 800, and full-bleed colour fields that each own a whole section. The page reads as a stack of banners (red, coral, sand, near-black), separated by the cream paper they sit on. There is one typeface, no motion, and no tracking, and the system leans on scale and colour instead of ornament.",
+    "keyCharacteristics": [
+      "Committed colour: red is a full-bleed field, not an accent.",
+      "One family (Inter Variable); hierarchy comes from size and weight 800 vs 400.",
+      "Outlined pill buttons, hairline rules, square-cornered image areas.",
+      "Flat and still: no shadows, no animation, no gradients.",
+      "Photo areas are placeholders: the wobble mark tone-on-tone on a colour field.",
+      "Light and dark themes, switched per page view with nothing stored."
+    ],
+    "rules": [
+      { "name": "The Field Rule", "body": "Colour lives in full-bleed regions that own a section. Each field sets its own text, button, link, and mark colours; children inherit them. Never lay a small coloured patch on top of another field.", "section": "colors" },
+      { "name": "The Brown Rule", "body": "The owner's brown (#8C5C32) is deliberately unused. Do not introduce it.", "section": "colors" },
+      { "name": "The Ink-On-Warm Rule", "body": "Cream text goes only on red and night fields; Bark Ink goes on coral and sand.", "section": "colors" },
+      { "name": "The One Family Rule", "body": "Inter only. Do not add a second face; change weight or size instead.", "section": "typography" },
+      { "name": "The Shout Once Rule", "body": "Uppercase 800 is for display, headline, tile names, nav and buttons. Body, leads, and metadata stay sentence case.", "section": "typography" },
+      { "name": "The Flat Rule", "body": "Surfaces do not lift. State is shown by colour inversion, never by shadow or motion.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do give each section one full-bleed field (red, coral, sand, or night) and let its tokens style the children.",
+      "Do set display and headline in Inter 800 uppercase with negative tracking.",
+      "Do use pill buttons with 2px borders; invert on hover.",
+      "Do keep ink-on-warm pairings: cream on red and night, Bark Ink on coral and sand.",
+      "Do keep placeholders as the wobble mark on a colour field until real photos exist.",
+      "Do keep visible 3px focus outlines in both themes."
+    ],
+    "donts": [
+      "Don't use the brown (#8C5C32).",
+      "Don't add a second typeface, shadows, gradients, or animation.",
+      "Don't round image areas or tiles.",
+      "Don't replace rails with a uniform card grid.",
+      "Don't store the theme choice (no cookie, no localStorage)."
+    ]
+  }
+}

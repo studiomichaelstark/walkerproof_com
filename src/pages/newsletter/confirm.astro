@@ -2,7 +2,11 @@
 import Base from '../../layouts/Base.astro';
 ---
 <Base title="Check your inbox" description="Confirm your email address to finish subscribing." noindex>
-  <h1 class="font-serif text-4xl font-semibold">Check your inbox</h1>
-  <p class="mt-4 text-lg">We sent you an email. Click the link inside to confirm your address. Nothing is sent until you do.</p>
-  <p class="mt-4 text-muted">No email after a few minutes? Check your spam folder.</p>
+  <section id="confirm" aria-labelledby="confirm-title" class="field-red">
+    <div class="wrap section">
+  <h1 id="confirm-title" class="display">Check your inbox</h1>
+  <p class="lead mt-5">We sent you an email. Click the link inside to confirm your address. Nothing is sent until you do.</p>
+  <p class="mt-4">No email after a few minutes? Check your spam folder.</p>
+</div>
+  </section>
 </Base>

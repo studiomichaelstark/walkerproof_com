@@ -28,6 +28,15 @@ pnpm dev        # http://localhost:4321
 
 Topics: `src/content/topics/*.yaml`. Authors: `src/content/authors/*.yaml`.
 
+## Design
+
+- One font: Inter (variable, self-hosted via Fontsource).
+- Palette tokens live in `src/styles/global.css` (red, cream, sand, coral; brown is deliberately unused). Light and dark themes follow the OS setting.
+- The header toggle switches theme for the current page view only. Nothing is stored (no cookie, no localStorage), so it resets on navigation. Persisting it would need storage, which the privacy rules forbid.
+- No animations. Every page section has its own `id`.
+- Photo areas are placeholders (wobble mark on a colour field). Replace them with real photos when available.
+- Logo components: `src/components/Logo.astro` (wordmark), `Mark.astro` (round badge). Favicons and `site.webmanifest` are in `public/`.
+
 ## i18n
 
 Locale `en` only, no URL prefix. A new locale gets a prefix (`/de/`): add it to `astro.config.mjs`, create `src/content/guides/de/`, and link versions with the same `translationKey`.
@@ -44,7 +53,7 @@ No cookies, no localStorage, no third-party requests, self-hosted fonts (Fontsou
 
 ## TODOs
 
-- Newsletter backend: `NewsletterForm` posts to `/api/newsletter`, which does not exist yet. Implement a Cloudflare Pages Function that calls the Brevo double opt-in API (`POST /v3/contacts/doubleOptinConfirmation`), then redirects to `/newsletter/confirm/`. The Brevo confirmation template redirects to `/newsletter/welcome/`. Keep the API key in a Cloudflare secret.
+- Newsletter backend (form is disabled until `NEWSLETTER_OPEN` in `src/lib/site.ts` is set to true): `NewsletterForm` posts to `/api/newsletter`, which does not exist yet. Implement a Cloudflare Pages Function that calls the Brevo double opt-in API (`POST /v3/contacts/doubleOptinConfirmation`), then redirects to `/newsletter/confirm/`. The Brevo confirmation template redirects to `/newsletter/welcome/`. Keep the API key in a Cloudflare secret.
 - Privacy policy is a DRAFT: get it legally reviewed before launch.
 - Link `/legal/affiliate-disclosure/` once affiliate links exist.
 - Replace placeholder author bio, About text, checklist content, and the lead magnet delivery.
