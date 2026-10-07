@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 const { topic, guides } = Astro.props;
 ---
 <Base title={topic.data.title} description={topic.data.description}>
-  <section id="topic-header" aria-labelledby="topic-title" class="field-coral">
+  <section id="topic-header" aria-labelledby="topic-title" class="border-b border-line">
     <div class="wrap section">
       <p class="text-sm font-semibold uppercase tracking-wide"><a href="/topics/" class="underline">Topics</a></p>
       <h1 id="topic-title" class="display mt-3">{topic.data.title}</h1>

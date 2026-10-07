@@ -27,7 +27,7 @@ Static Astro site on Cloudflare, hosted from the owner's GitHub repo; content is
 - Affiliate links only with a visible disclosure.
 
 ## Brand Commitments
-Name: Walkerproof. Assets in `/Users/michaelkonjevic/Documents/Kunden/Walkerproof.com/Logo/`: wordmark (`walkerproofLogo.svg`), round "wobble" badge (`wobble.svg`), favicon set. Palette from the owner (Adobe Color): red #A60321, cream #F2E9D8, brown #8C5C32 (avoid or use rarely), sand #D9A577, coral #D97B66. Style reference: the HYLO running-shoe site (bold uppercase headlines, huge wordmark, photo-led split sections, outlined pill buttons, horizontal card rows), a direction rather than a template.
+Name: Walkerproof. Assets in `/Users/michaelkonjevic/Documents/Kunden/Walkerproof.com/Logo/`: wordmark (`walkerproofLogo.svg`), round "wobble" badge (`wobble.svg`), favicon set. Palette from the owner (Adobe Color), by role: cream #F2E9D8 is the body background; red #A60321 is the accent colour only (buttons, highlighted words); sand #D9A577 is used sparingly; brown #8C5C32 and coral #D97B66 are not used. The dark theme uses a derived neutral near-black. Style reference: the HYLO running-shoe site (bold uppercase headlines, huge wordmark, photo-led split sections, outlined pill buttons, horizontal card rows), a direction rather than a template.
 
 ## Evidence on Hand
 No photos yet (owner will supply them), no testimonials, no real guides published yet (one draft sample). Photo areas are placeholders until then.

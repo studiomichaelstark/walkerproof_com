@@ -31,7 +31,7 @@ Topics: `src/content/topics/*.yaml`. Authors: `src/content/authors/*.yaml`.
 ## Design
 
 - One font: Inter (variable, self-hosted via Fontsource).
-- Palette tokens live in `src/styles/global.css` (red, cream, sand, coral; brown is deliberately unused). Light and dark themes follow the OS setting.
+- Palette tokens live in `src/styles/global.css`: cream is the body background, red is accent only, sand is used sparingly; brown and coral are deliberately unused. Light and dark themes follow the OS setting.
 - The header toggle switches theme for the current page view only. Nothing is stored (no cookie, no localStorage), so it resets on navigation. Persisting it would need storage, which the privacy rules forbid.
 - No animations. Every page section has its own `id`.
 - Photo areas are placeholders (wobble mark on a colour field). Replace them with real photos when available.

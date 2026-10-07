@@ -44,7 +44,7 @@ const jsonLd = [
 ];
 ---
 <Base title={data.title} description={data.description} type="article" jsonLd={jsonLd} image={heroUrl}>
-  <section id="guide-header" aria-labelledby="guide-title" class="field-coral">
+  <section id="guide-header" aria-labelledby="guide-title" class="border-b border-line">
     <div class="wrap section">
       <nav aria-label="Breadcrumb" class="text-sm font-semibold uppercase tracking-wide">
         <ol class="flex flex-wrap gap-x-2">
@@ -68,7 +68,7 @@ const jsonLd = [
     )}
     <div class="prose prose-lg"><Content /></div>
   </article>
-  <section id="guide-author" aria-labelledby="author-box" class="field-sand">
+  <section id="guide-author" aria-labelledby="author-box" class="border-b border-line">
     <div class="wrap py-12">
       <h2 id="author-box" class="text-sm font-semibold uppercase tracking-wide">About the author</h2>
       <p class="mt-3 h3">{author.data.url ? <a href={author.data.url} class="underline">{author.data.name}</a> : author.data.name}</p>

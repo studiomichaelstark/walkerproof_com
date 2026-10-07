@@ -2,25 +2,28 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
-/* Palette (owner's Adobe Color file). Brown is kept out of the UI on purpose. */
+/* Palette (owner's Adobe Color file), used by role:
+   cream = body background, red = accent only, sand = used sparingly.
+   Brown and coral are deliberately not used. Dark theme uses a derived warm near-black. */
 :root {
   --red: #a60321;
   --cream: #f2e9d8;
   --sand: #d9a577;
-  --coral: #d97b66;
-  --night: #1c1211;
-  --ink-dark: #2a1816;
+  --night: #171413;
+  --ink-dark: #221d1b;
 
   /* Light theme roles */
   --bg: var(--cream);
-  --surface: #faf5ea;
+  --surface: color-mix(in oklab, var(--cream) 93%, var(--ink-dark));
   --ink: var(--ink-dark);
-  --muted: color-mix(in oklab, var(--ink) 68%, var(--bg));
+  --muted: color-mix(in oklab, var(--ink) 70%, var(--bg));
   --line: color-mix(in oklab, var(--ink) 22%, var(--bg));
+  --accent: var(--red);
+  --accent-text: var(--red);
+  --on-accent: var(--cream);
   --link: var(--red);
-  --panel: var(--night);
-  --on-panel: var(--cream);
-  --mark-ink: var(--cream);
+  --ph-bg: var(--surface);
+  --ph-ring: color-mix(in oklab, var(--bg) 86%, var(--ink));
   --btn-c: var(--ink);
   --btn-i: var(--bg);
   color-scheme: light;
@@ -29,19 +32,21 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     --bg: var(--night);
-    --surface: #271917;
+    --surface: #211c1a;
     --ink: var(--cream);
-    --link: var(--coral);
-    --panel: #271917;
+    --accent-text: var(--sand);
+    --link: var(--sand);
+    --ph-ring: color-mix(in oklab, var(--bg) 88%, var(--cream));
     color-scheme: dark;
   }
 }
 :root[data-theme='dark'] {
   --bg: var(--night);
-  --surface: #271917;
+  --surface: #211c1a;
   --ink: var(--cream);
-  --link: var(--coral);
-  --panel: #271917;
+  --accent-text: var(--sand);
+  --link: var(--sand);
+  --ph-ring: color-mix(in oklab, var(--bg) 88%, var(--cream));
   color-scheme: dark;
 }
 
@@ -53,28 +58,28 @@
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-link: var(--link);
+  --color-accent: var(--accent-text);
 }
 
 @layer base {
   html { font-family: var(--font-sans); background: var(--bg); color: var(--ink); }
   body { font-size: 1.0625rem; line-height: 1.6; }
   a { text-underline-offset: 0.2em; }
-  :focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
-  .field-red :focus-visible, .field-panel :focus-visible { outline-color: var(--cream); }
+  :focus-visible { outline: 3px solid var(--accent-text); outline-offset: 3px; }
+  .field-ink :focus-visible { outline-color: var(--cream); }
+  .field-sand :focus-visible { outline-color: var(--ink-dark); }
   ::selection { background: var(--red); color: var(--cream); }
-  .field-red ::selection, .field-panel ::selection { background: var(--cream); color: var(--red); }
-  :root { scrollbar-color: var(--red) var(--bg); }
+  :root { scrollbar-color: var(--line) var(--bg); }
   input::placeholder { color: currentColor; opacity: 0.7; }
   input:disabled, button:disabled { cursor: not-allowed; opacity: 0.75; }
   [id] { scroll-margin-top: 1rem; }
 }
 
 @layer components {
-  /* Fields: full-bleed colour regions that own the page. */
-  .field-red { background: var(--red); color: var(--cream); --btn-c: var(--cream); --btn-i: var(--red); --mark-ink: var(--red); --link: var(--cream); }
-  .field-coral { background: var(--coral); color: var(--ink-dark); --btn-c: var(--ink-dark); --btn-i: var(--coral); --link: var(--ink-dark); --mark-ink: var(--coral); }
-  .field-sand { background: var(--sand); color: var(--ink-dark); --btn-c: var(--ink-dark); --btn-i: var(--sand); --link: var(--ink-dark); --mark-ink: var(--sand); }
-  .field-panel { background: var(--panel); color: var(--on-panel); --btn-c: var(--cream); --btn-i: var(--night); --link: var(--coral); --mark-ink: var(--night); }
+  /* Fields: the only coloured regions. Ink band for contrast, sand band used sparingly. */
+  .field-ink { background: var(--ink-dark); color: var(--cream); --btn-c: var(--cream); --btn-i: var(--ink-dark); --link: var(--sand); --ph-bg: color-mix(in oklab, var(--ink-dark) 86%, var(--cream)); --ph-ring: color-mix(in oklab, var(--ink-dark) 74%, var(--cream)); }
+  .field-sand { background: var(--sand); color: var(--ink-dark); --btn-c: var(--ink-dark); --btn-i: var(--sand); --link: var(--ink-dark); }
+    .text-accent { color: var(--accent-text); }
 
   .wrap { width: 100%; max-width: 72rem; margin-inline: auto; padding-inline: 1.25rem; }
   @media (min-width: 48rem) { .wrap { padding-inline: 2.5rem; } }
@@ -98,24 +103,19 @@
     letter-spacing: 0.03em; text-transform: uppercase; text-decoration: none; cursor: pointer;
   }
   .btn:hover { background: var(--btn-c); color: var(--btn-i); }
-  .btn-solid { background: var(--btn-c); color: var(--btn-i); }
-  .btn-solid:hover { background: transparent; color: var(--btn-c); }
+  .btn-solid { background: var(--red); border-color: var(--red); color: var(--cream); }
+  .btn-solid:hover { background: transparent; color: var(--btn-c); border-color: var(--btn-c); }
+  .field-sand .btn-solid { background: var(--ink-dark); border-color: var(--ink-dark); color: var(--sand); }
   .btn-sm { min-height: 2.5rem; padding: 0.4rem 1rem; font-size: 0.8125rem; }
 
-  .rail.rail-bleed { padding-inline: 1.25rem; scroll-padding-inline-start: 1.25rem; }
-  @media (min-width: 48rem) { .rail.rail-bleed { padding-inline-start: max(2.5rem, calc((100% - 72rem) / 2 + 2.5rem)); scroll-padding-inline-start: max(2.5rem, calc((100% - 72rem) / 2 + 2.5rem)); } }
-
-  .ph { position: relative; overflow: hidden; display: block; }
-  .ph > svg { position: absolute; width: 70%; right: -12%; bottom: -14%; opacity: 0.9; }
-
-  .rail { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x proximity; scroll-padding-inline: 1.25rem; padding-bottom: 1rem; }
-  @media (min-width: 48rem) { .rail { scroll-padding-inline: 2.5rem; } }
-  .rail > * { flex: 0 0 min(78vw, 19rem); scroll-snap-align: start; }
-
-  .prose { --tw-prose-body: var(--ink); --tw-prose-headings: var(--ink); --tw-prose-links: var(--link);
-    --tw-prose-bold: var(--ink); --tw-prose-counters: var(--muted); --tw-prose-bullets: var(--muted);
-    --tw-prose-hr: var(--line); --tw-prose-quotes: var(--ink); --tw-prose-quote-borders: var(--line);
-    --tw-prose-code: var(--ink); --tw-prose-th-borders: var(--line); --tw-prose-td-borders: var(--line); }
-  .prose :where(h1, h2, h3, h4) { font-weight: 800; letter-spacing: -0.025em; text-wrap: balance; }
-  .prose :where(h2) { text-transform: uppercase; letter-spacing: -0.03em; }
+  .ph { position: relative; overflow: hidden; display: block; background: var(--ph-bg); color: var(--ph-ring); border: 1px solid var(--line); --mark-ink: var(--ph-bg); }
+  .ph > svg { position: absolute; width: 46%; right: -6%; bottom: -12%; }
 }
+
+/* Unlayered on purpose: must beat the typography plugin's own prose colours in both themes. */
+.prose { --tw-prose-body: var(--ink); --tw-prose-headings: var(--ink); --tw-prose-links: var(--link);
+  --tw-prose-bold: var(--ink); --tw-prose-counters: var(--muted); --tw-prose-bullets: var(--muted);
+  --tw-prose-hr: var(--line); --tw-prose-quotes: var(--ink); --tw-prose-quote-borders: var(--line);
+  --tw-prose-code: var(--ink); --tw-prose-th-borders: var(--line); --tw-prose-td-borders: var(--line); }
+.prose :where(h1, h2, h3, h4) { font-weight: 800; letter-spacing: -0.025em; text-wrap: balance; }
+.prose :where(h2) { text-transform: uppercase; letter-spacing: -0.03em; }

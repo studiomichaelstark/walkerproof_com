@@ -1,19 +1,23 @@
 ---
 name: Walkerproof
-description: Gear-care guides in outdoor-sportswear clothing, with giant uppercase Inter on full-bleed colour fields.
+description: A gear-care publication set like outdoor sportswear branding, giant uppercase Inter on cream, one red accent, no tracking.
 colors:
-  red: "#a60321"
-  cream: "#f2e9d8"
-  sand: "#d9a577"
-  coral: "#d97b66"
-  night: "#1c1211"
-  ink-dark: "#2a1816"
-  surface-light: "#faf5ea"
-  surface-dark: "#271917"
+  cream: "#F2E9D8"
+  ink: "#221D1B"
+  red: "#A60321"
+  sand: "#D9A577"
+  night: "#171413"
+  night-surface: "#211C1A"
 typography:
   display:
     fontFamily: "Inter Variable, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(2.5rem, 1rem + 7.4vw, 6rem)"
+    fontWeight: 800
+    lineHeight: 0.94
+    letterSpacing: "-0.035em"
+  guide-title:
+    fontFamily: "Inter Variable, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(2.25rem, 1rem + 5.4vw, 4.5rem)"
     fontWeight: 800
     lineHeight: 0.94
     letterSpacing: "-0.035em"
@@ -43,175 +47,166 @@ typography:
     fontFamily: "Inter Variable, ui-sans-serif, system-ui, sans-serif"
     fontSize: "0.9375rem"
     fontWeight: 600
-    lineHeight: 1.2
+    lineHeight: 1.6
+    letterSpacing: "0.03em"
+  label-sm:
+    fontFamily: "Inter Variable, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "0.8125rem"
+    fontWeight: 600
+    lineHeight: 1.6
     letterSpacing: "0.03em"
 rounded:
-  none: "0"
   pill: "999px"
+  none: "0"
 spacing:
-  rail-gap: "16px"
   gutter-sm: "20px"
   gutter-md: "40px"
   section: "clamp(3.5rem, 2rem + 6vw, 7rem)"
+  wrap-max: "72rem"
 components:
   button-solid:
-    backgroundColor: "{colors.ink-dark}"
-    textColor: "{colors.cream}"
-    typography: "{typography.label}"
-    rounded: "{rounded.pill}"
-    padding: "11px 24px"
-    height: "48px"
-  button-outline:
-    backgroundColor: "transparent"
-    textColor: "{colors.ink-dark}"
-    typography: "{typography.label}"
-    rounded: "{rounded.pill}"
-    padding: "11px 24px"
-    height: "48px"
-  button-small:
-    typography: "{typography.label}"
-    rounded: "{rounded.pill}"
-    padding: "6px 16px"
-    height: "40px"
-  field-red:
     backgroundColor: "{colors.red}"
     textColor: "{colors.cream}"
-  field-coral:
-    backgroundColor: "{colors.coral}"
-    textColor: "{colors.ink-dark}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
+    padding: "0.7rem 1.5rem"
+    height: "3rem"
+  button-outline:
+    backgroundColor: "transparent"
+    textColor: "{colors.ink}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
+    padding: "0.7rem 1.5rem"
+    height: "3rem"
+  button-outline-hover:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.cream}"
+  button-sm:
+    typography: "{typography.label-sm}"
+    rounded: "{rounded.pill}"
+    padding: "0.4rem 1rem"
+    height: "2.5rem"
+  field-ink:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.cream}"
   field-sand:
     backgroundColor: "{colors.sand}"
-    textColor: "{colors.ink-dark}"
-  field-panel:
-    backgroundColor: "{colors.night}"
-    textColor: "{colors.cream}"
-  photo-placeholder:
-    backgroundColor: "{colors.coral}"
-    rounded: "{rounded.none}"
-  email-input:
-    backgroundColor: "transparent"
-    rounded: "{rounded.pill}"
-    padding: "8px 20px"
-    height: "48px"
+    textColor: "{colors.ink}"
 ---
 
 # Design System: Walkerproof
 
 ## Overview
 
-**Creative North Star: "The Trailhead Banner"**
+**Creative North Star: "The Trail-Wear Label"**
 
-A gear-care publication that dresses like outdoor sportswear: giant uppercase Inter at weight 800, and full-bleed colour fields that each own a whole section. The page reads as a stack of banners (red, coral, sand, near-black), separated by the cream paper they sit on. There is one typeface, no motion, and no tracking, and the system leans on scale and colour instead of ornament.
+A gear-care publication set the way outdoor sportswear is branded: giant uppercase Inter on a cream page, centred, with one red accent and typographic lists where other sites would use colour blocks or card grids. The page is mostly cream and ink. Colour is rationed: red appears on the primary button, one highlighted word and hover, and the only coloured regions are one ink band and one sand band.
 
-Density is low and the type is loud. Headlines are uppercase and tightly set; everything around them is plain body copy, hairline rules, and outlined pills. Guides are the product, so chrome stays small (header, nav, a theme toggle) and the colour fields do the branding.
-
-The build refuses the cream-blog-with-serif default and the uniform card grid. Rows of tiles and guides scroll sideways as rails instead.
+The system is quiet by construction. There is one typeface, no animation, no shadows, no gradients and no stored state. Hierarchy comes from scale and weight (800 uppercase against 400 body) and from hairline rules, not from decoration. Photography is not yet supplied, so photo areas are tone-on-tone placeholders carrying the round "wobble" mark. Style reference is the HYLO running-shoe site, as a direction rather than a template.
 
 **Key Characteristics:**
-- Committed colour: red is a full-bleed field, not an accent.
-- One family (Inter Variable); hierarchy comes from size and weight 800 vs 400.
-- Outlined pill buttons, hairline rules, square-cornered image areas.
-- Flat and still: no shadows, no animation, no gradients.
-- Photo areas are placeholders: the wobble mark tone-on-tone on a colour field.
-- Light and dark themes, switched per page view with nothing stored.
+- Centred editorial composition; text sections centre, the privacy split is the one asymmetric moment.
+- Giant 800-weight uppercase Inter with tight tracking.
+- Red is accent only; sand appears in one band (and as accent text in dark theme).
+- Hairline rules and typographic lists instead of cards and colour blocks.
+- Outlined pill buttons, one solid red.
+- No motion, no cookies, no storage, no third-party requests.
 
 ## Colors
 
-Four saturated fields plus cream paper and warm near-black; the owner's palette, used flat.
+A cream-and-ink page with a single red voice, one sand band, and a neutral near-black dark theme.
 
 ### Primary
-- **Walker Red** (#a60321): the hero and newsletter field, selection highlight, scrollbar thumb, light-theme link and focus colour. Cream text sits on it.
+- **Walker Red** (`colors.red`): the accent and nothing else. Primary solid button, the single highlighted word in a hero headline, text selection background. Accent text in light theme only; in dark theme red is replaced by sand for text and links.
 
 ### Secondary
-- **Trail Coral** (#d97b66): a secondary full field (topic tiles, placeholders) and, in dark theme, the link and focus colour.
-- **Dry Sand** (#d9a577): the checklist field and alternating tile/placeholder fields. Dark ink on top.
+- **Dry Sand** (`colors.sand`): used sparingly. Background of the one checklist band; in dark theme the accent text and link colour; link colour on the ink band. Never a second accent on the cream page.
 
 ### Neutral
-- **Paper Cream** (#f2e9d8): light-theme page ground, text on red and on the dark panel, mark ink on red-adjacent surfaces.
-- **Raised Cream** (#faf5ea): light-theme surface role.
-- **Night Bark** (#1c1211): dark-theme page ground and the privacy/footer panel in light theme.
-- **Warm Panel** (#271917): dark-theme surface and panel.
-- **Bark Ink** (#2a1816): body text in light theme, and text on coral and sand.
-- Muted text and hairline rules are mixes of ink into the ground (68% and 22% in oklab), so they follow the theme.
+- **Paper Cream** (`colors.cream`): body background in light theme, text colour in dark theme and on the ink band.
+- **Warm Ink** (`colors.ink`): body text in light theme, the ink band background, the outline button colour.
+- **Night** (`colors.night`): dark-theme page ground, a neutral near-black.
+- **Night Surface** (`colors.night-surface`): dark-theme placeholder and surface tone.
+- Derived by `color-mix` in the stylesheet, not separate tokens: muted text (ink 70% over background), hairline rule (ink 22% over background), cream surface (cream 93% with ink 7%).
 
 ### Named Rules
-**The Field Rule.** Colour lives in full-bleed regions that own a section. Each field sets its own text, button, link, and mark colours; children inherit them. Never lay a small coloured patch on top of another field.
-**The Brown Rule.** The owner's brown (#8C5C32) is deliberately unused. Do not introduce it.
-**The Ink-On-Warm Rule.** Cream text goes only on red and night fields; Bark Ink goes on coral and sand.
+**The Red-Is-Accent Rule.** Red marks the one action or the one word that matters on a screen. It is never a background field, never a section colour.
+**The Two-Fields Rule.** Coloured regions are limited to the ink band and the sand band. A new surface uses cream, or reuses one of those two fields.
+**The No-Brown-No-Coral Rule.** The owner's palette also holds a brown and a coral; both are deliberately unused and must stay out.
 
 ## Typography
 
 **Display Font:** Inter Variable (with ui-sans-serif, system-ui, sans-serif)
-**Body Font:** Inter Variable (same)
+**Body Font:** Inter Variable, the same family. Self-hosted; no second family.
 
-**Character:** Sportswear-poster Inter: heavy, uppercase, negatively tracked at the top of the scale, then plain and readable for prose. Weight and size contrast carry all hierarchy.
+**Character:** One family doing every job. Weight and case carry the hierarchy: 800 uppercase for display and headings, 700 sentence case for card titles, 400 for reading text, 600 uppercase for labels and navigation.
 
 ### Hierarchy
-- **Display** (800, clamp(2.5rem, 1rem + 7.4vw, 6rem), 0.94, uppercase, -0.035em): hero and newsletter headings.
-- **Headline** (800, clamp(1.875rem, 1.1rem + 3.4vw, 3.5rem), 1.0, uppercase, -0.03em): section headings; also guide article h2 via prose.
-- **Title** (700, 1.375rem, 1.15, -0.02em): tile names (uppercased on topic tiles) and guide titles on cards.
-- **Lead** (400, clamp(1.125rem, 1rem + 0.5vw, 1.375rem), 1.45, max 38rem): the sentence under a heading.
-- **Body** (400, 1.0625rem, 1.6): prose.
-- **Label** (600, 0.9375rem, +0.03em, uppercase; 0.8125rem on small): buttons, nav (0.875rem), form labels.
+- **Display** (800, clamp(2.5rem, 1rem + 7.4vw, 6rem), 0.94, -0.035em, uppercase, balanced): home hero and newsletter headline.
+- **Guide title** (800, clamp(2.25rem, 1rem + 5.4vw, 4.5rem), 0.94, -0.035em, uppercase): the h1 of a guide page. An intentional step below Display, because guide titles are long sentences; it is applied as an inline override on the display class.
+- **Headline** (800, clamp(1.875rem, 1.1rem + 3.4vw, 3.5rem), 1, -0.03em, uppercase): section headings and the typographic topic list rows.
+- **Title** (700, 1.375rem, 1.15, -0.02em): guide card titles, author name.
+- **Lead** (400, clamp(1.125rem, 1rem + 0.5vw, 1.375rem), 1.45, max 38rem): one-sentence intros under headlines.
+- **Body** (400, 1.0625rem, 1.6): running text; guide prose uses the typography plugin with 800 headings.
+- **Label** (600, 0.9375rem, 0.03em, uppercase): buttons, form labels.
+- **Label small** (600, 0.8125rem, 0.03em, uppercase): the small button (`.btn-sm`) only. An intentional step of the ramp for secondary actions such as "All guides". Navigation and counts use the 0.875rem utility size at 600 uppercase.
 
 ### Named Rules
-**The One Family Rule.** Inter only. Do not add a second face; change weight or size instead.
-**The Shout Once Rule.** Uppercase 800 is for display, headline, tile names, nav and buttons. Body, leads, and metadata stay sentence case.
+**The One Family Rule.** Inter only. Differentiate with weight, size and case, never with a second face.
+**The Loud-Headline Rule.** Headlines are uppercase 800 with negative tracking; body copy is never uppercase.
 
 ## Layout
 
-Content column is 72rem max, centred, with 1.25rem gutters (2.5rem from 48rem up). Sections use a fluid vertical pad of clamp(3.5rem, 2rem + 6vw, 7rem). Full-bleed fields sit outside the column; their content re-enters it via the wrap. Split sections (privacy, checklist) are a two-column grid from 48rem, a colour/placeholder half against a text half with 3rem to 5rem padding, alternating sides. On mobile they stack.
-
-Horizontal rails (topics, guides) are flex rows with a 1rem gap and scroll-snap; items are min(78vw, 19rem) wide. The topics rail bleeds to the viewport edge but its first tile aligns to the content column (rail-bleed, via padding-inline-start max(2.5rem, (100% - 72rem)/2 + 2.5rem)). Rails are keyboard-focusable. The hero mark is cropped by the field edge and sits bottom-right on desktop, below the copy on mobile. Header is a thin bar with a hairline bottom rule; nav wraps to its own row on mobile.
+Centred editorial column. Content sits in a 72rem wrap with 1.25rem gutters, widening to 2.5rem from 48rem. Sections breathe on a fluid vertical pad of clamp(3.5rem, 2rem + 6vw, 7rem); consecutive cream sections drop their top pad so rhythm stays even. Hero, topics, guides, checklist and newsletter are centred; the privacy section is a two-column split (placeholder left, text right) from 48rem, stacked below. The latest-guides row is a three-column grid from 48rem with 2rem gaps. Every section carries its own id and a labelled heading. Header is a centred wordmark above a centred, wrapping nav row; the footer is an ink band with a full-width wordmark.
 
 ## Elevation & Depth
 
-Flat. There are no shadows. Depth is tonal and by cropping: colour fields against paper, and the oversized mark clipped by field edges. Hairline rules (22% ink mix) separate sections and cards.
+Flat. There are no shadows, gradients or blurs. Depth is conveyed by tonal bands (cream, ink, sand), 1px hairline rules (`--line`), and tone-on-tone placeholders. Hover is a fill or colour change, never a lift. There is no animation anywhere.
 
 ### Named Rules
-**The Flat Rule.** Surfaces do not lift. State is shown by colour inversion, never by shadow or motion.
+**The Flat-Always Rule.** No box-shadows and no motion. A state change is an instant colour swap.
 
 ## Shapes
 
-Two shapes only: pills (999px) for every button and text input, and square corners (0) for all image areas, tiles, and fields. Borders are 2px, in the current text colour, on buttons and inputs; 1px hairlines for rules. Photo areas are square-cornered, overflow hidden, with the wobble mark (70% wide, offset right and below, cropped) in the field's mark ink, so it reads tone-on-tone. Topic tiles are 4:5, guide image areas 4:3.
+Two shapes only: fully rounded pills (999px) for every button and the email input, and hard right angles for everything else (placeholders, bands, notes, rules). Placeholders are rectangles at 16:9 / 21:9 (hero), 4:3 (guide card) or filling a split half. The wobble mark, a round scalloped badge with footprints, sits cropped off the bottom-right corner of each placeholder at 46% width, in a tone barely lighter or darker than the placeholder ground.
 
 ## Components
 
 ### Buttons
-- **Shape:** full pill (999px), 2px border in the field's button colour, min-height 3rem (2.5rem small).
-- **Solid:** fill is the field's button colour, text the field's inverse; padding 0.7rem 1.5rem, label type (uppercase, 600, +0.03em).
-- **Outline:** transparent with a 2px border.
-- **Hover:** solid and outline invert (fill swaps). No transition, no movement.
-- **Focus:** 3px outline in the link colour, 3px offset; cream on red and panel fields.
+- **Shape:** pill (999px), 2px border, min-height 3rem, padding 0.7rem 1.5rem, uppercase 600 at 0.9375rem.
+- **Primary (solid):** red fill and border, cream text. Hover turns transparent with the context colour border and text.
+- **Outline (default):** transparent, ink border and text. Hover fills with ink and flips text to cream. Inside the ink band it inverts to cream; inside the sand band the solid button becomes ink with sand text.
+- **Small:** 2.5rem high, 0.8125rem, for secondary actions.
+- **Focus:** 3px outline in the accent text colour with 3px offset (cream on ink band, ink on sand band).
 
-### Topic tile
-A 4:5 colour field linking to a topic, cycling coral, sand, red; title top-left in uppercase Title type, with the cropped wobble mark in tone-on-tone at bottom right.
+### Topic list (signature)
+A typographic list instead of cards: full-width rows between hairlines, headline-size topic name on the left, small uppercase guide count on the right, name turns accent on hover.
 
-### Guide item
-Home: 4:3 colour placeholder, Title-type name, small muted line "Topic · date". Archive card: top hairline, 1.5rem vertical padding, title that underlines on hover, muted description and meta.
+### Guide card (home)
+Placeholder at 4:3, title (Title style), then a muted small line of topic and date. No border, no fill; whole card is one link that turns accent on hover. On list pages a guide is a hairline-topped row with title, muted description and meta.
+
+### Photo placeholder
+Tone-on-tone rectangle with a 1px hairline border and the wobble mark cropped at the corner. Marked `aria-hidden`. Replaced by real photography when supplied.
 
 ### Inputs / Fields
-Email input is a pill with a 2px current-colour border, transparent ground, inherited text, 5 (1.25rem) horizontal padding, min-height 3rem; placeholder at 70% opacity. Label above in uppercase label type. Disabled (signup not yet open): 75% opacity, not-allowed cursor.
+Email input is a pill with a 2px current-colour border, transparent background, 3rem minimum height, placeholder at 70% opacity. Paired with the solid button in a row from 40rem. Disabled state is 75% opacity with a not-allowed cursor; the button reads "Opening soon" until the newsletter is live.
 
 ### Navigation
-Uppercase 600 small type with +tracking, no underline at rest, underline on hover; current page is marked with aria-current. The theme toggle is a small outline pill, shown only with JavaScript; it flips the theme for the current view and stores nothing.
-
-### Wobble Mark (signature)
-The round wobble badge as an inline SVG filled with currentColor/mark ink. It is the hero graphic, the stand-in for photos, and the footer wordmark partner. Always cropped by a container edge when oversized.
+Centred row of uppercase 600 links at 0.875rem with wide tracking (0.025em) and 1.75rem gaps, hover turns accent, current page carries `aria-current`. A theme toggle sits at the end of the row as an underlined text button ("Dark mode" / "Light mode"). It is revealed only when JavaScript runs, stores nothing and holds for the current page view.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** give each section one full-bleed field (red, coral, sand, or night) and let its tokens style the children.
-- **Do** set display and headline in Inter 800 uppercase with negative tracking.
-- **Do** use pill buttons with 2px borders; invert on hover.
-- **Do** keep ink-on-warm pairings: cream on red and night, Bark Ink on coral and sand.
-- **Do** keep placeholders as the wobble mark on a colour field until real photos exist.
-- **Do** keep visible 3px focus outlines in both themes.
+- **Do** keep red to the primary button, one highlighted headline word and hover.
+- **Do** build lists as typographic rows between hairlines before reaching for cards.
+- **Do** centre text sections and keep leads to 38rem.
+- **Do** use 800 uppercase with negative tracking for every display and section heading.
+- **Do** swap sand in for red as accent text in the dark theme (`--accent-text`, `--link`).
+- **Do** keep every section id'd and labelled, and keep contrast at WCAG AA in both themes.
 
 ### Don't:
-- **Don't** use the brown (#8C5C32).
-- **Don't** add a second typeface, shadows, gradients, or animation.
-- **Don't** round image areas or tiles.
-- **Don't** replace rails with a uniform card grid.
-- **Don't** store the theme choice (no cookie, no localStorage).
+- **Don't** use brown (#8C5C32) or coral (#D97B66); they are in the owner's palette but out of the system.
+- **Don't** fill a section with red or add a third coloured band.
+- **Don't** add animation, transitions, shadows, gradients, cookies, localStorage or third-party requests.
+- **Don't** add a second typeface.
+- **Don't** replace a placeholder with an illustrative stock image; wait for supplied photography.
