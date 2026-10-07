@@ -57,6 +57,7 @@ typography:
     letterSpacing: "0.03em"
 rounded:
   pill: "999px"
+  card: "1.75rem"
   none: "0"
 spacing:
   gutter-sm: "20px"
