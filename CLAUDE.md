@@ -14,6 +14,8 @@
 
 ## Design
 
-- Inter is the only font. Motion is limited to subtle micro-animations (`motion`) and smooth scroll (`lenis`), bundled locally and disabled under `prefers-reduced-motion`. Cream #F2E9D8 is the body background, red #A60321 is accent only, sand #D9A577 is used sparingly. Brown #8C5C32 and coral #D97B66 are not used.
+- Reference: designlab.framer.website. Black ground, white light-weight Inter, lime #DDFF00 for primary buttons, orange glow, glass cards, floating pill navigation. Do not bring back the retired cream/red palette.
+- Inter is the only font. Wordmark is plain text for now.
+- Motion: smooth scroll (`lenis`), scroll reveal, hover lift, sticky steps, marquee, parallax (`motion`), all in `src/scripts/motion.ts`, bundled locally and disabled under `prefers-reduced-motion`.
 - Colours come from tokens in `src/styles/global.css`; do not hardcode new palette values.
-- Every section needs its own `id`. Keep light and dark themes working, and the theme toggle storage-free.
+- Every section needs its own `id`. Dark is the default; keep the light theme working and the theme toggle storage-free.

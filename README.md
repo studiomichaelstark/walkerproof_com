@@ -30,13 +30,13 @@ Topics: `src/content/topics/*.yaml`. Authors: `src/content/authors/*.yaml`.
 
 ## Design
 
-- One font: Inter (variable, self-hosted via Fontsource).
-- Palette tokens live in `src/styles/global.css`: cream is the body background, red is accent only, sand is used sparingly; brown and coral are deliberately unused. Light and dark themes follow the OS setting.
-- The header toggle switches theme for the current page view only. Nothing is stored (no cookie, no localStorage), so it resets on navigation. Persisting it would need storage, which the privacy rules forbid.
-- Motion: smooth scroll (Lenis) and micro-animations (Motion, vanilla build) in `src/scripts/motion.ts`. Mark elements with `data-reveal` (fade-up on scroll) or `data-lift` (hover lift). Both libraries are bundled with the site (no CDN, no cookies) and everything is off when the visitor prefers reduced motion.
+- Style follows the DesignLab template (designlab.framer.website): black ground, light-weight white type, lime primary buttons, orange glow, glass cards, floating pill navigation with an active state.
+- One font: Inter (variable, self-hosted via Fontsource). Tokens live in `src/styles/global.css`.
+- Dark is the default. The header toggle switches to a light theme for the current page view only. Nothing is stored (no cookie, no localStorage), so it resets on navigation.
+- Motion lives in `src/scripts/motion.ts`: smooth scroll (Lenis), fade-up reveal (`data-reveal`), hover lift (`data-lift`), parallax columns (`data-parallax`), sticky steps (`data-steps`), a hero demo and a CSS marquee. Libraries are bundled with the site (no CDN, no cookies). Everything is off when the visitor prefers reduced motion.
+- Photo areas are glass placeholders with a warm glow until real photos exist (see `docs/image-prompts.md`).
+- The logo files are not used on the page yet; the header shows "Walkerproof" as text.
 - Every page section has its own `id`.
-- Photo areas are placeholders (wobble mark on a colour field). Replace them with real photos when available.
-- Logo components: `src/components/Logo.astro` (wordmark), `Mark.astro` (round badge). Favicons and `site.webmanifest` are in `public/`.
 
 ## i18n
 

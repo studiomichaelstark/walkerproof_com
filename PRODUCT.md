@@ -27,7 +27,7 @@ Static Astro site on Cloudflare, hosted from the owner's GitHub repo; content is
 - Affiliate links only with a visible disclosure.
 
 ## Brand Commitments
-Name: Walkerproof. Assets in `/Users/michaelkonjevic/Documents/Kunden/Walkerproof.com/Logo/`: wordmark (`walkerproofLogo.svg`), round "wobble" badge (`wobble.svg`), favicon set. Palette from the owner (Adobe Color), by role: cream #F2E9D8 is the body background; red #A60321 is the accent colour only (buttons, highlighted words); sand #D9A577 is used sparingly; brown #8C5C32 and coral #D97B66 are not used. The dark theme uses a derived neutral near-black. Style reference: the HYLO running-shoe site (bold uppercase headlines, huge wordmark, photo-led split sections, outlined pill buttons, horizontal card rows), a direction rather than a template.
+Name: Walkerproof. The logo files in `/Users/michaelkonjevic/Documents/Kunden/Walkerproof.com/Logo/` are not used on the page for now; the header shows "Walkerproof" as plain text. The favicon set is still used. Visual direction (revision 3, owner's decision): copy the structure, colours, width and motion of the DesignLab template (designlab.framer.website): black ground, white light-weight type, lime #DDFF00 for primary actions, orange/amber glow, glass cards. The earlier cream/red palette is retired. Inter stays the only font (the reference uses Instrument Sans). Dark is the default; a light theme exists behind the toggle. 
 
 ## Evidence on Hand
 No photos yet (owner will supply them), no testimonials, no real guides published yet (one draft sample). Photo areas are placeholders until then.

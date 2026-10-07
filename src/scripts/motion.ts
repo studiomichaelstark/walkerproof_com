@@ -1,6 +1,6 @@
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
-import { animate, hover, inView, press } from 'motion';
+import { animate, hover, inView, press, scroll } from 'motion';
 
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -43,6 +43,61 @@ if (!reduced) {
     press(el, () => {
       animate(el, { transform: 'scale(0.96)' }, { duration: 0.12 });
       return () => animate(el, { transform: 'scale(1)' }, { duration: 0.2, ease });
+    });
+  });
+
+  // Hero demo: the "Rain jacket" chip is dragged across the board, then returns. Looks like the board is being worked.
+  const chip = document.querySelector<HTMLElement>('[data-chip]');
+  const board = document.querySelector<HTMLElement>('[data-board]');
+  if (chip && board) {
+    const loop = async () => {
+      const step = chip.getBoundingClientRect().width + 12;
+      await animate(chip, { transform: 'translateX(0px)' }, { duration: 0.01 });
+      await new Promise((r) => setTimeout(r, 1800));
+      await animate(chip, { transform: `translateX(${step}px)` }, { duration: 0.9, ease });
+      await new Promise((r) => setTimeout(r, 1500));
+      await animate(chip, { transform: `translateX(${step * 2}px)` }, { duration: 0.9, ease });
+      await new Promise((r) => setTimeout(r, 2200));
+      loop();
+    };
+    loop();
+  }
+
+  // Parallax: masonry columns drift at different speeds while the section scrolls by.
+  document.querySelectorAll<HTMLElement>('[data-parallax]').forEach((col) => {
+    if (!window.matchMedia('(min-width: 48rem)').matches) return;
+    const dist = Number(col.dataset.parallax ?? 0);
+    scroll(animate(col, { transform: [`translateY(${-dist}px)`, `translateY(${dist}px)`] }, { ease: 'linear' }), {
+      target: col,
+      offset: ['start end', 'end start'],
+    });
+  });
+
+  // Sticky steps: scroll progress picks the active step and cross-fades the visual.
+  const stepsRoot = document.querySelector<HTMLElement>('[data-steps]');
+  if (stepsRoot && window.matchMedia('(min-width: 64rem)').matches) {
+    stepsRoot.setAttribute('data-steps-ready', '');
+    const items = [...stepsRoot.querySelectorAll<HTMLElement>('[data-step]')];
+    const visuals = [...stepsRoot.querySelectorAll<HTMLElement>('[data-visual]')];
+    let current = 0;
+    scroll(
+      (progress: number) => {
+        const next = Math.min(items.length - 1, Math.floor(progress * items.length));
+        if (next === current) return;
+        current = next;
+        items.forEach((el, i) => (i === next ? el.setAttribute('aria-current', 'step') : el.removeAttribute('aria-current')));
+        visuals.forEach((el, i) => animate(el, { opacity: i === next ? 1 : 0 }, { duration: 0.5, ease }));
+      },
+      { target: stepsRoot, offset: ['start 40%', 'end end'] },
+    );
+  }
+
+  // Cursor spotlight on glass cards.
+  document.querySelectorAll<HTMLElement>('[data-spot]').forEach((el) => {
+    el.addEventListener('pointermove', (e) => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      el.style.setProperty('--my', `${e.clientY - r.top}px`);
     });
   });
 }

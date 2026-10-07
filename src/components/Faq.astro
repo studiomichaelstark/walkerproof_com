@@ -3,15 +3,14 @@ import type { FaqItem } from '../lib/faq';
 interface Props { items: FaqItem[] }
 const { items } = Astro.props;
 ---
-<div class="divide-y divide-line border-y border-line">
+<div class="flex flex-col gap-3">
   {items.map((item) => (
-    <details class="group py-5">
-      <summary class="flex cursor-pointer list-none items-baseline justify-between gap-6 text-left h3 hover:text-accent [&::-webkit-details-marker]:hidden">
+    <details class="glass group px-6 py-5" data-reveal>
+      <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-lg [&::-webkit-details-marker]:hidden">
         <span>{item.question}</span>
-        <span class="shrink-0 text-sm font-semibold uppercase tracking-wide text-muted group-open:hidden">Open</span>
-        <span class="hidden shrink-0 text-sm font-semibold uppercase tracking-wide text-muted group-open:inline">Close</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="h-6 w-6 shrink-0 transition-transform group-open:rotate-45" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14" /></svg>
       </summary>
-      <p class="mt-3 max-w-prose text-muted">{item.answer}</p>
+      <p class="mt-4 max-w-prose text-[var(--soft)]">{item.answer}</p>
     </details>
   ))}
 </div>

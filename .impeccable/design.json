@@ -1,129 +1,142 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-07T00:00:00Z",
+  "generatedAt": "2026-10-07T00:00:00.000Z",
   "title": "Design System: Walkerproof",
   "extensions": {
     "colorMeta": {
-      "red": { "role": "primary", "displayName": "Walker Red", "canonical": "#A60321", "tonalRamp": ["#2a0009", "#4a0211", "#6e0218", "#A60321", "#c4283f", "#d9626f", "#eba0a8", "#f8dadd"] },
-      "sand": { "role": "secondary", "displayName": "Dry Sand", "canonical": "#D9A577", "tonalRamp": ["#3a2812", "#5e411f", "#8a5f31", "#b2814f", "#D9A577", "#e5bd96", "#efd5bb", "#f8ebdc"] },
-      "cream": { "role": "neutral", "displayName": "Paper Cream", "canonical": "#F2E9D8", "tonalRamp": ["#3a342a", "#665d4c", "#928769", "#b8ac8e", "#d3c8ae", "#e3dac4", "#F2E9D8", "#faf6ed"] },
-      "ink": { "role": "neutral", "displayName": "Warm Ink", "canonical": "#221D1B", "tonalRamp": ["#0e0c0b", "#171413", "#221D1B", "#38312e", "#554c47", "#7a6f68", "#a39890", "#d2cbc5"] },
-      "night": { "role": "neutral", "displayName": "Night", "canonical": "#171413", "tonalRamp": ["#0a0909", "#110f0e", "#171413", "#211C1A", "#2e2724", "#413834", "#5c524c", "#8a7f78"] },
-      "night-surface": { "role": "neutral", "displayName": "Night Surface", "canonical": "#211C1A", "tonalRamp": ["#0e0c0b", "#171413", "#211C1A", "#2e2724", "#413834", "#5c524c", "#8a7f78", "#c2b9b3"] }
+      "lime": { "role": "primary", "displayName": "Signal Lime", "canonical": "#ddff00", "tonalRamp": ["#2b3300", "#4d5c00", "#718500", "#96b000", "#bbd800", "#ddff00", "#ecff75", "#f7ffc2"] },
+      "orange": { "role": "secondary", "displayName": "Ember Orange", "canonical": "#ff9a1f", "tonalRamp": ["#3d2000", "#6b3a00", "#995600", "#c77300", "#ff9a1f", "#ffb257", "#ffcb8f", "#ffe6c7"] },
+      "orange-hot": { "role": "secondary", "displayName": "Hot Ember", "canonical": "#ff4d00", "tonalRamp": ["#3d1300", "#6b2300", "#9c3400", "#cc4200", "#ff4d00", "#ff7a40", "#ffa880", "#ffd4bf"] },
+      "glow-amber": { "role": "secondary", "displayName": "Glow Amber", "canonical": "#ffb000", "tonalRamp": ["#3d2a00", "#6b4a00", "#996b00", "#c78a00", "#ffb000", "#ffc547", "#ffd980", "#ffecbf"] },
+      "black-ground": { "role": "neutral", "displayName": "Stage Black", "canonical": "#000000", "tonalRamp": ["#000000", "#0f0f0f", "#1a1a1a", "#2e2e2e", "#4d4d4d", "#808080", "#b3b3b3", "#e6e6e6"] },
+      "paper-light": { "role": "neutral", "displayName": "Warm Paper (light theme)", "canonical": "#f4f4ef", "tonalRamp": ["#1c1c1a", "#3a3a37", "#595955", "#7d7d78", "#a3a39e", "#c8c8c3", "#e2e2dd", "#f4f4ef"] }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Home hero and newsletter headline; 800 uppercase." },
-      "guide-title": { "displayName": "Guide title", "purpose": "H1 of a guide page; intentional step below Display for long titles." },
-      "headline": { "displayName": "Headline", "purpose": "Section headings and topic list rows." },
-      "title": { "displayName": "Title", "purpose": "Guide card titles, author name." },
-      "lead": { "displayName": "Lead", "purpose": "One-sentence intro under a headline, max 38rem." },
+      "display": { "displayName": "Display", "purpose": "Hero headline and footer sign-off, weight 300." },
+      "headline": { "displayName": "Headline", "purpose": "Section titles, weight 300, balanced." },
+      "title": { "displayName": "Title", "purpose": "Card, step and term titles, weight 400." },
+      "lead": { "displayName": "Lead", "purpose": "Section intro paragraphs, soft ink, 40rem max." },
       "body": { "displayName": "Body", "purpose": "Running text." },
-      "label": { "displayName": "Label", "purpose": "Buttons and form labels, uppercase." },
-      "label-sm": { "displayName": "Label small", "purpose": "Small button (.btn-sm) only; intentional step of the ramp." }
+      "label": { "displayName": "Label", "purpose": "Buttons, nav links, form labels, weight 500." }
     },
-    "shadows": [],
-    "motion": [],
+    "shadows": [
+      { "name": "light-glass", "value": "0 1px 0 rgba(0,0,0,0.04), 0 18px 40px -28px rgba(0,0,0,0.25)", "purpose": "Light theme only: separates white glass from paper." },
+      { "name": "nav-blur", "value": "backdrop-filter: blur(14px)", "purpose": "Floating pill nav over scrolling content." },
+      { "name": "orb-glow", "value": "radial-gradient(circle, #ffb000 0%, #ff7a00 30%, #c2300a 50%, rgba(60,10,0,0.6) 62%, transparent 72%)", "purpose": "Hero glow behind the visual panel." },
+      { "name": "spotlight", "value": "radial-gradient(18rem circle at var(--mx) var(--my), rgba(221,255,0,0.12), transparent 60%)", "purpose": "Cursor spotlight on glass why-cards." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Shared easing for reveal, lift and press release." },
+      { "name": "reveal", "value": "opacity 0 to 1, translateY 20px to 0, 0.7s, stagger 0.08s", "purpose": "Scroll reveal once per element." },
+      { "name": "lift", "value": "translateY(-6px), 0.3s", "purpose": "Hover lift on cards." },
+      { "name": "press", "value": "scale(0.96), 0.12s down, 0.2s up", "purpose": "Button press feedback." },
+      { "name": "marquee", "value": "40s linear infinite, paused on hover", "purpose": "Topic ticker; scrollable row under reduced motion." },
+      { "name": "smooth-scroll", "value": "Lenis lerp 0.1", "purpose": "Smooth page scroll; disabled under prefers-reduced-motion." }
+    ],
     "breakpoints": [
+      { "name": "sm", "value": "40rem" },
       { "name": "md", "value": "48rem" },
-      { "name": "sm", "value": "40rem" }
+      { "name": "lg", "value": "64rem" }
     ]
   },
   "components": [
     {
-      "name": "Solid Button",
+      "name": "Primary Button",
       "kind": "button",
-      "refersTo": "button-solid",
-      "description": "Primary action, red pill. One per view.",
-      "html": "<a class=\"ds-btn ds-btn-solid\" href=\"#\">Read the guides</a>",
-      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;min-height:3rem;padding:.7rem 1.5rem;border:2px solid #221D1B;border-radius:999px;color:#221D1B;background:transparent;font:600 .9375rem/1.6 'Inter Variable',system-ui,sans-serif;letter-spacing:.03em;text-transform:uppercase;text-decoration:none;cursor:pointer}.ds-btn-solid{background:#A60321;border-color:#A60321;color:#F2E9D8}.ds-btn-solid:hover{background:transparent;color:#221D1B;border-color:#221D1B}.ds-btn:focus-visible{outline:3px solid #A60321;outline-offset:3px}"
+      "refersTo": "button-primary",
+      "description": "Lime pill, the single primary action style.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Read the guides</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 24px; border: 1px solid #ddff00; border-radius: 999px; background: #ddff00; color: #000; font: 500 15px/1.6 'Inter Variable', system-ui, sans-serif; text-decoration: none; cursor: pointer; transition: background .2s, border-color .2s, transform .12s; } .ds-btn-primary:hover { background: #f0ff70; border-color: #f0ff70; } .ds-btn-primary:focus-visible { outline: 3px solid #ddff00; outline-offset: 3px; } .ds-btn-primary:active { transform: scale(.96); }"
     },
     {
       "name": "Outline Button",
       "kind": "button",
       "refersTo": "button-outline",
-      "description": "Default pill button; fills with ink on hover.",
-      "html": "<a class=\"ds-btn-o\" href=\"#\">Get the checklist</a>",
-      "css": ".ds-btn-o{display:inline-flex;align-items:center;justify-content:center;min-height:3rem;padding:.7rem 1.5rem;border:2px solid #221D1B;border-radius:999px;color:#221D1B;background:transparent;font:600 .9375rem/1.6 'Inter Variable',system-ui,sans-serif;letter-spacing:.03em;text-transform:uppercase;text-decoration:none}.ds-btn-o:hover{background:#221D1B;color:#F2E9D8}.ds-btn-o:focus-visible{outline:3px solid #A60321;outline-offset:3px}"
+      "description": "Hairline pill for secondary actions.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">All guides</a>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 24px; border: 1px solid rgba(255,255,255,.14); border-radius: 999px; background: transparent; color: #fff; font: 500 15px/1.6 'Inter Variable', system-ui, sans-serif; text-decoration: none; cursor: pointer; transition: border-color .2s, transform .12s; } .ds-btn-outline:hover { border-color: #fff; } .ds-btn-outline:focus-visible { outline: 3px solid #ddff00; outline-offset: 3px; } .ds-btn-outline:active { transform: scale(.96); }"
     },
     {
-      "name": "Small Button",
-      "kind": "button",
-      "refersTo": "button-sm",
-      "description": "Secondary action such as All guides.",
-      "html": "<a class=\"ds-btn-sm\" href=\"#\">All guides</a>",
-      "css": ".ds-btn-sm{display:inline-flex;align-items:center;min-height:2.5rem;padding:.4rem 1rem;border:2px solid #221D1B;border-radius:999px;color:#221D1B;font:600 .8125rem/1.6 'Inter Variable',system-ui,sans-serif;letter-spacing:.03em;text-transform:uppercase;text-decoration:none}.ds-btn-sm:hover{background:#221D1B;color:#F2E9D8}.ds-btn-sm:focus-visible{outline:3px solid #A60321;outline-offset:3px}"
+      "name": "Glass Card",
+      "kind": "card",
+      "refersTo": "card-glass",
+      "description": "Frosted gradient card, 28px corners, hairline border.",
+      "html": "<div class=\"ds-glass\"><p class=\"ds-glass-n\">01</p><h3>Plain English</h3><p class=\"ds-glass-t\">Labels decoded. No jargon, no hype.</p></div>",
+      "css": ".ds-glass { padding: 24px; min-height: 220px; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,.14); border-radius: 28px; background: linear-gradient(145deg, rgba(255,255,255,.1), rgba(255,255,255,.03)); color: #fff; font-family: 'Inter Variable', system-ui, sans-serif; transition: transform .3s cubic-bezier(.22,1,.36,1); } .ds-glass:hover { transform: translateY(-6px); } .ds-glass-n { margin: auto 0 0; font-size: 14px; color: rgba(255,255,255,.62); } .ds-glass h3 { margin: 4px 0 0; font-weight: 400; font-size: 28px; line-height: 1.15; letter-spacing: -.02em; } .ds-glass-t { margin: 8px 0 0; color: rgba(255,255,255,.8); }"
+    },
+    {
+      "name": "Orange CTA Card",
+      "kind": "card",
+      "refersTo": "card-orange",
+      "description": "Orange glow card carrying the checklist or newsletter call to action.",
+      "html": "<div class=\"ds-orange\"><h3>Get started today</h3><p>One page to check before and after every trip.</p><a class=\"ds-orange-btn\" href=\"#\">Get the checklist</a></div>",
+      "css": ".ds-orange { display: flex; flex-direction: column; min-height: 220px; padding: 24px; border-radius: 28px; color: #fff; font-family: 'Inter Variable', system-ui, sans-serif; background: radial-gradient(120% 90% at 50% 120%, #ff9a1f 0%, #ff4d00 38%, #3a1203 72%, #0b0402 100%); } .ds-orange h3 { margin: 0; font-weight: 400; font-size: 28px; line-height: 1.15; letter-spacing: -.02em; } .ds-orange p { margin: 8px 0 0; color: rgba(255,255,255,.85); } .ds-orange-btn { margin-top: auto; display: inline-flex; justify-content: center; align-items: center; min-height: 48px; border-radius: 999px; background: #fff; color: #000; font-weight: 500; font-size: 15px; text-decoration: none; } .ds-orange-btn:hover { background: #e9e9e9; } .ds-orange-btn:focus-visible { outline: 3px solid #ddff00; outline-offset: 3px; }"
+    },
+    {
+      "name": "Floating Pill Nav",
+      "kind": "nav",
+      "refersTo": "nav-pill",
+      "description": "Blurred pill with wordmark, links, active glass pill with lime dot, and a small lime button.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-nav-brand\" href=\"#\">Walkerproof</a><nav><a class=\"ds-nav-link\" href=\"#\" aria-current=\"page\">Guides</a><a class=\"ds-nav-link\" href=\"#\">Topics</a><a class=\"ds-nav-link\" href=\"#\">Checklist</a></nav><a class=\"ds-nav-cta\" href=\"#\">Get the checklist</a></header>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 24px; border: 1px solid rgba(255,255,255,.14); border-radius: 999px; background: rgba(15,15,15,.8); backdrop-filter: blur(14px); font-family: 'Inter Variable', system-ui, sans-serif; color: #fff; } .ds-nav-brand { font-size: 24px; font-weight: 500; letter-spacing: -.025em; color: #fff; text-decoration: none; } .ds-nav nav { display: flex; gap: 4px; } .ds-nav-link { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; font-size: 15px; color: rgba(255,255,255,.8); text-decoration: none; } .ds-nav-link:hover { color: #fff; background: rgba(255,255,255,.1); } .ds-nav-link:focus-visible { outline: 3px solid #ddff00; outline-offset: 3px; } .ds-nav-link[aria-current] { color: #fff; background: rgba(255,255,255,.1); box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); } .ds-nav-link[aria-current]::before { content: ''; width: 6.4px; height: 6.4px; margin-right: 8px; border-radius: 50%; background: #ddff00; } .ds-nav-cta { display: inline-flex; align-items: center; min-height: 40px; padding: 6px 18px; border-radius: 999px; background: #ddff00; color: #000; font-size: 14px; font-weight: 500; text-decoration: none; } .ds-nav-cta:hover { background: #f0ff70; }"
     },
     {
       "name": "Email Field",
       "kind": "input",
-      "refersTo": "button-outline",
-      "description": "Pill input with current-colour border, paired with the solid button.",
-      "html": "<input class=\"ds-input\" type=\"email\" placeholder=\"you@example.com\" aria-label=\"Email address\">",
-      "css": ".ds-input{min-height:3rem;border:2px solid currentColor;border-radius:999px;background:transparent;padding:.5rem 1.25rem;color:#221D1B;font:400 1.0625rem 'Inter Variable',system-ui,sans-serif}.ds-input::placeholder{color:currentColor;opacity:.7}.ds-input:focus-visible{outline:3px solid #A60321;outline-offset:3px}"
+      "refersTo": "input-pill",
+      "description": "Pill input with current-colour border, used in the newsletter form.",
+      "html": "<label class=\"ds-field-l\" for=\"ds-e\">Email address</label><input id=\"ds-e\" class=\"ds-field\" type=\"email\" placeholder=\"you@example.com\">",
+      "css": ".ds-field-l { display: block; margin-bottom: 8px; font: 500 15px 'Inter Variable', system-ui, sans-serif; color: #fff; } .ds-field { box-sizing: border-box; width: 100%; min-height: 48px; padding: 8px 20px; border: 1px solid currentColor; border-radius: 999px; background: transparent; color: #fff; font: 400 17px 'Inter Variable', system-ui, sans-serif; } .ds-field::placeholder { color: currentColor; opacity: .55; } .ds-field:focus-visible { outline: 3px solid #ddff00; outline-offset: 3px; } .ds-field:disabled { opacity: .7; cursor: not-allowed; }"
     },
     {
-      "name": "Navigation",
-      "kind": "nav",
-      "description": "Centred uppercase link row with the theme toggle as a text button.",
-      "html": "<nav><ul class=\"ds-nav\"><li><a href=\"#\">Guides</a></li><li><a href=\"#\">Topics</a></li><li><a href=\"#\">Checklist</a></li><li><a href=\"#\">About</a></li><li><button type=\"button\">Dark mode</button></li></ul></nav>",
-      "css": ".ds-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:0 1.75rem;list-style:none;margin:0;padding:0;font:600 .875rem/1.6 'Inter Variable',system-ui,sans-serif;letter-spacing:.025em;text-transform:uppercase;color:#221D1B}.ds-nav a{display:inline-block;padding:.5rem 0;color:inherit;text-decoration:none}.ds-nav a:hover{color:#A60321}.ds-nav button{padding:.5rem 0;border:0;background:none;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;text-decoration:underline;text-underline-offset:.3em;cursor:pointer}.ds-nav button:hover{color:#A60321}"
-    },
-    {
-      "name": "Topic List Row",
+      "name": "FAQ Pill",
       "kind": "custom",
-      "description": "Typographic list row between hairlines: headline name, small uppercase count.",
-      "html": "<ul class=\"ds-topics\"><li><a href=\"#\"><span class=\"ds-t-name\">Footwear</span><span class=\"ds-t-count\">3 guides</span></a></li><li><a href=\"#\"><span class=\"ds-t-name\">Rain gear</span><span class=\"ds-t-count\">1 guide</span></a></li></ul>",
-      "css": ".ds-topics{list-style:none;margin:0;padding:0;border-top:1px solid #c9bfae;color:#221D1B}.ds-topics li{border-bottom:1px solid #c9bfae}.ds-topics a{display:flex;align-items:baseline;justify-content:space-between;gap:1.5rem;padding:1.25rem 0;color:inherit;text-decoration:none}.ds-t-name{font:800 clamp(1.875rem,1.1rem + 3.4vw,3.5rem)/1 'Inter Variable',system-ui,sans-serif;letter-spacing:-.03em;text-transform:uppercase}.ds-t-count{flex-shrink:0;font:600 .875rem/1.4 'Inter Variable',system-ui,sans-serif;letter-spacing:.025em;text-transform:uppercase;color:#5c544c}.ds-topics a:hover{color:#A60321}.ds-topics a:focus-visible{outline:3px solid #A60321;outline-offset:3px}"
+      "refersTo": "card-glass",
+      "description": "Glass accordion row with a plus icon that rotates when open.",
+      "html": "<details class=\"ds-faq\" open><summary><span>Is waterproof the same as water-resistant?</span><svg viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg></summary><p>No. Resistant handles splashes; waterproof blocks sustained rain.</p></details>",
+      "css": ".ds-faq { padding: 20px 24px; border: 1px solid rgba(255,255,255,.14); border-radius: 28px; background: linear-gradient(145deg, rgba(255,255,255,.1), rgba(255,255,255,.03)); color: #fff; font-family: 'Inter Variable', system-ui, sans-serif; } .ds-faq summary { display: flex; align-items: center; justify-content: space-between; gap: 24px; font-size: 18px; cursor: pointer; list-style: none; } .ds-faq summary::-webkit-details-marker { display: none; } .ds-faq summary:focus-visible { outline: 3px solid #ddff00; outline-offset: 3px; border-radius: 4px; } .ds-faq svg { flex-shrink: 0; transition: transform .2s; } .ds-faq[open] svg { transform: rotate(45deg); } .ds-faq p { margin: 16px 0 0; max-width: 65ch; color: rgba(255,255,255,.8); }"
     },
     {
-      "name": "Guide Card",
-      "kind": "card",
-      "description": "Flat card: tone-on-tone placeholder, title, meta. No border or shadow.",
-      "html": "<a class=\"ds-card\" href=\"#\"><span class=\"ds-ph\"></span><span class=\"ds-c-title\">How to re-waterproof a shell</span><span class=\"ds-c-meta\">Rain gear · 12 Sep 2026</span></a>",
-      "css": ".ds-card{display:block;color:#221D1B;text-decoration:none;max-width:22rem}.ds-ph{display:block;aspect-ratio:4/3;background:#e3dbcb;border:1px solid #c9bfae}.ds-c-title{display:block;margin-top:1rem;font:700 1.375rem/1.15 'Inter Variable',system-ui,sans-serif;letter-spacing:-.02em}.ds-c-meta{display:block;margin-top:.25rem;font:400 .875rem/1.4 'Inter Variable',system-ui,sans-serif;color:#5c544c}.ds-card:hover{color:#A60321}.ds-card:focus-visible{outline:3px solid #A60321;outline-offset:3px}"
-    },
-    {
-      "name": "Sand Band",
+      "name": "Glow Placeholder",
       "kind": "custom",
-      "refersTo": "field-sand",
-      "description": "The single sand field: centred headline, lead, ink solid button.",
-      "html": "<section class=\"ds-sand\"><h2>The gear care checklist</h2><p>One page. What to check before and after every trip.</p><a class=\"ds-sand-btn\" href=\"#\">Get the checklist</a></section>",
-      "css": ".ds-sand{background:#D9A577;color:#221D1B;text-align:center;padding:4rem 1.25rem;font-family:'Inter Variable',system-ui,sans-serif}.ds-sand h2{margin:0;font:800 clamp(1.875rem,1.1rem + 3.4vw,3.5rem)/1 'Inter Variable',system-ui,sans-serif;letter-spacing:-.03em;text-transform:uppercase}.ds-sand p{margin:1.25rem auto 0;max-width:38rem;font-size:1.25rem;line-height:1.45}.ds-sand-btn{display:inline-flex;align-items:center;min-height:3rem;margin-top:2rem;padding:.7rem 1.5rem;border:2px solid #221D1B;border-radius:999px;background:#221D1B;color:#D9A577;font:600 .9375rem 'Inter Variable',system-ui,sans-serif;letter-spacing:.03em;text-transform:uppercase;text-decoration:none}.ds-sand-btn:hover{background:transparent;color:#221D1B}.ds-sand-btn:focus-visible{outline:3px solid #221D1B;outline-offset:3px}"
+      "refersTo": "card-glass",
+      "description": "Dark glass photo placeholder with warm corner glow and a title overlay.",
+      "html": "<a class=\"ds-ph\" href=\"#\"><span class=\"ds-ph-cap\"><span><span class=\"ds-ph-t\">Footwear</span><span class=\"ds-ph-d\">Waterproof shoes and boots</span></span><span class=\"ds-ph-b\">3 guides</span></span></a>",
+      "css": ".ds-ph { position: relative; display: block; overflow: hidden; aspect-ratio: 4/5; border: 1px solid rgba(255,255,255,.14); border-radius: 28px; background: radial-gradient(60% 70% at 85% 110%, rgba(255,140,20,.55), rgba(255,70,0,.18) 55%, transparent 75%), linear-gradient(145deg, #1a1a1a, #090909); color: #fff; text-decoration: none; font-family: 'Inter Variable', system-ui, sans-serif; transition: transform .3s cubic-bezier(.22,1,.36,1); } .ds-ph:hover { transform: translateY(-6px); } .ds-ph:focus-visible { outline: 3px solid #ddff00; outline-offset: 3px; } .ds-ph-cap { position: absolute; inset: auto 0 0; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding: 80px 24px 24px; background: linear-gradient(to top, rgba(0,0,0,.8), transparent); } .ds-ph-t { display: block; font-size: 28px; font-weight: 400; line-height: 1.15; letter-spacing: -.02em; } .ds-ph-d { display: block; margin-top: 4px; font-size: 14px; color: rgba(255,255,255,.75); } .ds-ph-b { flex-shrink: 0; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,.15); font-size: 14px; }"
     }
   ],
   "narrative": {
-    "northStar": "The Trail-Wear Label",
-    "overview": "A gear-care publication set the way outdoor sportswear is branded: giant uppercase Inter on a cream page, centred, with one red accent and typographic lists where other sites would use colour blocks or card grids. The page is mostly cream and ink. Colour is rationed: red appears on the primary button, one highlighted word and hover, and the only coloured regions are one ink band and one sand band.\n\nThe system is quiet by construction. There is one typeface, no animation, no shadows, no gradients and no stored state. Hierarchy comes from scale and weight (800 uppercase against 400 body) and from hairline rules, not from decoration. Photography is not yet supplied, so photo areas are tone-on-tone placeholders carrying the round \"wobble\" mark.",
+    "northStar": "The Night Trailhead",
+    "overview": "A black stage with one warm light source. Content sits on frosted glass panels, actions are lime pills, and a single orange glow (the sun coming up behind a wet ridge) is the only large colour field. The build follows the owner's decision to copy the structure, colours, width and motion of the DesignLab template, with Inter as the sole typeface. It is a content site: guides come first, the stage dresses them.\n\nDensity is airy. Sections breathe on a fluid vertical rhythm, the container is very wide (1600px), and type is large, light and tight. Depth comes from translucency, hairline borders and one radial glow, not from shadows. Motion is quiet: reveal, lift, press, parallax, a sticky step sequence, all off under prefers-reduced-motion. Dark is the default; a light theme exists behind a storage-free toggle and keeps the same structure with white glass on warm paper.\n\nPhoto areas are warm-glow glass placeholders until the owner supplies photography; they are a stand-in, not a final image language.",
     "keyCharacteristics": [
-      "Centred editorial composition; the privacy split is the one asymmetric moment.",
-      "Giant 800-weight uppercase Inter with tight tracking.",
-      "Red is accent only; sand appears in one band (and as accent text in dark theme).",
-      "Hairline rules and typographic lists instead of cards and colour blocks.",
-      "Outlined pill buttons, one solid red.",
-      "No motion, no cookies, no storage, no third-party requests."
+      "Black ground, white Inter at weight 300, sentence case, tight tracking.",
+      "Lime (#ddff00) is the only action colour; black text on it.",
+      "Glass cards: 10% to 3% white gradient, 1px border, 28px corners.",
+      "One orange glow family for the hero orb, CTA cards and photo placeholders.",
+      "Floating pill navigation with a lime active dot.",
+      "Dark by default, light by toggle, no stored preference."
     ],
     "rules": [
-      { "name": "The Red-Is-Accent Rule", "body": "Red marks the one action or the one word that matters on a screen. It is never a background field, never a section colour.", "section": "colors" },
-      { "name": "The Two-Fields Rule", "body": "Coloured regions are limited to the ink band and the sand band. A new surface uses cream, or reuses one of those two fields.", "section": "colors" },
-      { "name": "The No-Brown-No-Coral Rule", "body": "The owner's palette also holds a brown and a coral; both are deliberately unused and must stay out.", "section": "colors" },
-      { "name": "The One Family Rule", "body": "Inter only. Differentiate with weight, size and case, never with a second face.", "section": "typography" },
-      { "name": "The Loud-Headline Rule", "body": "Headlines are uppercase 800 with negative tracking; body copy is never uppercase.", "section": "typography" },
-      { "name": "The Flat-Always Rule", "body": "No box-shadows and no motion. A state change is an instant colour swap.", "section": "elevation" }
+      { "name": "The Lime Is For Doing Rule", "body": "Lime marks the thing to press or the current place. It never decorates headings, backgrounds or large areas.", "section": "colors" },
+      { "name": "The One Glow Rule", "body": "Orange appears as a radial glow (orb, CTA card, placeholder corner), never as a flat fill and never on text.", "section": "colors" },
+      { "name": "The Token Rule", "body": "New colours come from the custom properties in global.css; do not hardcode a new palette value.", "section": "colors" },
+      { "name": "The Light Weight Rule", "body": "Large type is 300 and sentence case. Uppercase display and heavy weights are not part of this system.", "section": "typography" },
+      { "name": "The Flat Stage Rule", "body": "No drop shadows in dark theme beyond the hero panel; separate surfaces with hairline and glass fill.", "section": "elevation" }
     ],
     "dos": [
-      "Do keep red to the primary button, one highlighted headline word and hover.",
-      "Do build lists as typographic rows between hairlines before reaching for cards.",
-      "Do centre text sections and keep leads to 38rem.",
-      "Do use 800 uppercase with negative tracking for every display and section heading.",
-      "Do swap sand in for red as accent text in the dark theme (`--accent-text`, `--link`).",
-      "Do keep every section id'd and labelled, and keep contrast at WCAG AA in both themes."
+      "Do keep Inter as the only family, light (300) for large type, sentence case.",
+      "Do make every primary action a lime pill with black text.",
+      "Do build surfaces from glass fill, a 1px hairline and 28px corners.",
+      "Do use orange only as a radial glow behind or inside a card.",
+      "Do read colours from the custom properties and keep both themes working.",
+      "Do give every section an id and keep motion transform and opacity only."
     ],
     "donts": [
-      "Don't use brown (#8C5C32) or coral (#D97B66); they are in the owner's palette but out of the system.",
-      "Don't fill a section with red or add a third coloured band.",
-      "Don't add animation, transitions, shadows, gradients, cookies, localStorage or third-party requests.",
-      "Don't add a second typeface.",
-      "Don't replace a placeholder with an illustrative stock image; wait for supplied photography."
+      "Don't reintroduce the retired cream, red, sand, brown or coral palette.",
+      "Don't put lime on large fills, headings or light-theme text; use ink with a lime underline there.",
+      "Don't add cookies, storage, trackers or third-party requests, including for the theme toggle.",
+      "Don't use a logo image in the header; the wordmark is plain text.",
+      "Don't treat the placeholder glow panels as final art; swap in photography when it arrives."
     ]
   }
 }
